@@ -3,16 +3,22 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import AWSImages from "../AWSImages/AWSImages"; 
 import Nav from "../Nav/Nav"; 
+import TabsWrappedLabel from "../UserPageTabs/UserPageTabs";
+import UserPageTabs from '../UserPageTabs/UserPageTabs';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
 const UserPage = (props) => (
+  <section>
   <div>
     {/* <LogOutButton className="log-in" /> */}
     <Nav />
-    <AWSImages />
+    {/* <AWSImages /> */}
+    <UserPageTabs /> 
   </div>
+
+   </section>
 );
 
 // Instead of taking everything from state, we just want the user info.
