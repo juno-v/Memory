@@ -6,9 +6,8 @@ function* entry (action) {
       console.log(`hit addEntrySaga`, action.payload);
       
       yield axios.post('/entry-upload', action.payload)
-      // yield put({ type: 'GET_ENTRIES' } );
     } catch (error) {
-      console.log(`Couldn't post entries`, action.payload, error);
+      console.log(`Couldn't post entries in addEntrySaga`, action.payload, error);
       alert(`Sorry, couldn't post the entries. Try again later`);
     }
   }

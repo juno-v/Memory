@@ -15,11 +15,12 @@ router.post('/', async(req, res, next) =>{
       newEntry.description,
       newEntry.location,
     ])
-    console.log(entry.rows[0].id)
+    // console.log(entry.rows[0].id)
     const insertPhotoText = `INSERT INTO "images" ("file", "entries_id") VALUES($1,$2);`
-    const insertPhotoValues = [newEntry.imageValues, entry.rows[0].id]
+    const insertPhotoValues = [newEntry.file, entry.rows[0].id]
     await client.query(insertPhotoText, insertPhotoValues)
     await client.query('COMMIT')
+    res.sendStatus(201)
   }catch (e) {
     await client.query('ROLLBACK')
     throw e

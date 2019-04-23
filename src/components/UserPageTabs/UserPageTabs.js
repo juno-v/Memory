@@ -7,6 +7,7 @@ import NoSsr from '@material-ui/core/NoSsr';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import CreateEntryForm from "../CreateEntryForm/CreateEntryForm";
+import EntriesList from "../EntriesList/EntriesList";
 
 function TabContainer(props) {
   return (
@@ -58,7 +59,7 @@ class NavTabs extends React.Component {
             </Tabs>
           </AppBar>
           {value === 0 && <TabContainer> {<CreateEntryForm />} </TabContainer>}
-          {value === 1 && <TabContainer> Page Two </TabContainer>}
+          {value === 1 && <TabContainer> {<EntriesList />} </TabContainer>}
         </div>
       </NoSsr>
     );

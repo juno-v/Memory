@@ -36,7 +36,7 @@ class CreateEntryForm extends Component {
         this.setState({ 
             newEntry: {
             ...this.state.newEntry,
-            file: event.target.files 
+             file: event.target.files 
             }
         });
     };
