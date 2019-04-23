@@ -38,7 +38,7 @@ const uploadFile = (buffer, name, type) => {
 console.log('my bucket is', process.env.BUCKET);
 
 // Define POST route
-router.post("/", (request, response) => {
+router.post("/upload", (request, response) => {
   console.log('is this working?');
 
   
@@ -59,9 +59,44 @@ form.parse(request, async (error, fields, files) => {
   } catch (error) {
       console.log(error);
     return response.status(400).send(error)
-  }
+    }
+  });
 });
-});
+
+var params = {
+  Bucket: process.env.BUCKET,
+  MaxKeys: 10
+};
+
+
+router.get("/bucket", (request, response) => {
+  console.log('in aws.router /bucket GET route');
+
+ const objectsArray = s3.listObjects(params, function(err, data) {
+     if (err) {
+       console.log(err, err.stack);
+       response.sendStatus(500);
+     }
+     // an error occurred
+     else {
+       console.log('raw data', data.Contents); // successful response
+
+       const siftedArray = data.Contents.map(obj => {
+         let params = {Bucket: process.env.BUCKET, Key: obj.Key};
+         let url = s3.getSignedUrl(`getObject`, params);
+         return {
+           key: obj.Key,
+           eTag: obj.ETag,
+           size: obj.Size,
+           storageClass: obj.StorageClass,
+           signedURL: url
+         } 
+       })
+
+       response.send({ siftedArray });
+     }
+   });
+})
 
 module.exports = router;
 

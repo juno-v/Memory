@@ -46,17 +46,16 @@ class CreateEntryForm extends Component {
         const formData = new FormData();
         formData.append("file", this.state.newEntry.file[0]);
         axios
-          .post(`/test-upload`, formData, {
+          .post(`/aws/upload`, formData, {
             headers: {
               "Content-Type": "multipart/form-data"
             }
           })
           .then(response => {
-            // handle your response;
             alert("file uploaded successfully");
           })
           .catch(error => {
-            // handle your error
+            console.log(`error in Submit file POST`, error)
           });
       };
 
