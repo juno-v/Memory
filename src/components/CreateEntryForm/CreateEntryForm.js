@@ -3,26 +3,28 @@ import AWSImages from "../AWSImages/AWSImages";
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
+import axios from "axios"
 
 
 class CreateEntryForm extends Component {
 
-    state = {
+constructor() {
+    super();
+    this.state = {
         newEntry: {
             id: 1,
             user_id: '',
-            image: '',
             title: '',
             url: '', 
             date: '',
             location: '',
             description: '',
-        
-
-        }
+            file: null,
     }
+}
 
-    handleNameChange = propertyName => {   
+  }
+    handleNameChange = (propertyName) => {   
         return(event) =>{
         this.setState({
             newEntry: {
@@ -33,54 +35,76 @@ class CreateEntryForm extends Component {
     }
 }
 
+    handleFileUpload = event => {
+        this.setState({ 
+            newEntry: {
+            ...this.state.newEntry,
+            file: event.target.files 
+            }
+        });
+    };
+
+    submitFile = event => {
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append("file", this.state.newEntry.file[0]);
+        axios
+          .post(`/test-upload`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
+          })
+          .then(response => {
+            // handle your response;
+            alert("file uploaded successfully");
+          })
+          .catch(error => {
+            // handle your error
+          });
+      };
+
     addEntry = (event) => {
         event.preventDefault();
-        console.log(`Hello mfer`);
         console.log(`state is: `, this.state.newEntry)
         this.setState({
         newEntry: {
             id: this.state.newEntry.id + 1,
             user_id: '',
-            image: '',
             title: '',
             url: '',
             date: '',
             location: '', 
-            description: '',
-           
+            description: '',         
+            file: '',  
         }
-    });
-        
-    }
+    });  
+}
 
     render() {
     
         return (
             <div>
-                <AWSImages />
+                    <input label="upload file" type="file" onChange={this.handleFileUpload}/>
+                    <button onClick={this.submitFile}>Send</button>
+
                     <br/>
                     <form>
-                    <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')} 
-                    label="Insert Journal Title"/>
-                    <br/>
-                    <TextField type='text' value={this.state.newEntry.url || ''} onChange={this.handleNameChange('url')} 
-                    label="Insert Youtube URL"/>
-                    <br/>
-                    {/* <TextField  type='text' value={this.state.newEntry.date || ''} onChange={this.handleNameChange('date')}
-                    label="Select Date" value={this.state.newEntry.date || ''} /> */}
-
-                    <TextField id="date" label="Select Date" type="date" value={this.state.newEntry.date || ''} onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}/>
-
-                    <br/>
-                    <TextField type='text' value={this.state.newEntry.location || ''} onChange={this.handleNameChange('location')}
-                    label="Insert Location" />
-                     <br/>
-                    <TextField type='text' value={this.state.newEntry.description || ''} onChange={this.handleNameChange('description')} 
-                    label="Insert Description"/>
-                    <br/>
-                    <br />
-                    
-                    <Button onClick={this.addEntry} type='submit' color="primary" variant="contained"> Create Entry </Button> 
+                        <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')} 
+                        label="Insert Journal Title"/>
+                        <br/>
+                        <TextField type='text' value={this.state.newEntry.url || ''} onChange={this.handleNameChange('url')} 
+                        label="Insert Youtube URL"/>
+                        <br/>
+                        <TextField id="date" label="Select Date" type="date" value={this.state.newEntry.date || ''} onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}/>
+                        <br/>
+                        <TextField type='text' value={this.state.newEntry.location || ''} onChange={this.handleNameChange('location')}
+                        label="Insert Location" />
+                        <br/>
+                        <TextField type='text' value={this.state.newEntry.description || ''} onChange={this.handleNameChange('description')} 
+                        label="Insert Description"/>
+                        <br/>
+                        <br />
+                        <Button onClick={this.addEntry} type='submit' color="primary" variant="contained"> Create Entry </Button> 
                     </form>
             </div>
         );
