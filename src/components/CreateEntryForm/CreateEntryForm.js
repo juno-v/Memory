@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AWSImages from "../AWSImages/AWSImages";
+// import AWSImages from "../AWSImages/AWSImages";
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
@@ -8,12 +8,10 @@ import axios from "axios"
 
 class CreateEntryForm extends Component {
 
-constructor() {
-    super();
-    this.state = {
+    state = {
         newEntry: {
-            id: 1,
-            user_id: '',
+            // id: 1,
+            user_id: this.props.reduxState.user.id,
             title: '',
             url: '', 
             date: '',
@@ -21,7 +19,6 @@ constructor() {
             description: '',
             file: null,
     }
-}
 
   }
     handleNameChange = (propertyName) => {   
@@ -66,10 +63,12 @@ constructor() {
     addEntry = (event) => {
         event.preventDefault();
         console.log(`state is: `, this.state.newEntry)
+        // dispatch to saga 
+        this.props.dispatch({ type: 'ADD_ENTRY', payload: this.state.newEntry })
         this.setState({
         newEntry: {
-            id: this.state.newEntry.id + 1,
-            user_id: '',
+            // id: this.state.newEntry.id + 1,
+            user_id: this.props.reduxState.user.id,
             title: '',
             url: '',
             date: '',
@@ -80,12 +79,13 @@ constructor() {
     });  
 }
 
+
     render() {
     
         return (
             <div>
                     <input label="upload file" type="file" onChange={this.handleFileUpload}/>
-                    <button onClick={this.submitFile}>Send</button>
+                    <button onClick={this.submitFile}>Upload your image</button>
 
                     <br/>
                     <form>

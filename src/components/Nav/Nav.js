@@ -7,7 +7,7 @@ import './Nav.css';
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title"> Hello, {props.user.username}! </h2>
+      <h2 className="nav-title"> Hello, {props.user.username}!  your user_id: {props.user.id} </h2>
     </Link>
     <div className="nav-right">
   

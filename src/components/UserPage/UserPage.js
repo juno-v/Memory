@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import AWSImages from "../AWSImages/AWSImages"; 
+// import LogOutButton from '../LogOutButton/LogOutButton';
 import Nav from "../Nav/Nav"; 
-import TabsWrappedLabel from "../UserPageTabs/UserPageTabs";
+// import TabsWrappedLabel from "../UserPageTabs/UserPageTabs";
 import UserPageTabs from '../UserPageTabs/UserPageTabs';
 
 // this could also be written with destructuring parameters as:
@@ -14,7 +13,6 @@ const UserPage = (props) => (
   <div>
     {/* <LogOutButton className="log-in" /> */}
     <Nav />
-    {/* <AWSImages /> */}
     <UserPageTabs /> 
   </div>
 
