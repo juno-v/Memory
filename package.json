@@ -15,6 +15,7 @@
     "express": "^4.16.4",
     "file-type": "^10.11.0",
     "fs": "0.0.1-security",
+    "moment": "^2.24.0",
     "multiparty": "^4.2.1",
     "nodemon": "^1.18.10",
     "passport": "^0.4.0",
