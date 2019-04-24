@@ -27,7 +27,7 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/aws', awsRouter);
-app.use('/entry-upload', entryRouter);
+app.use('/entry', entryRouter);
 
 // Serve static files
 app.use(express.static('build'));

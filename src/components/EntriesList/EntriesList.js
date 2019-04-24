@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import DisplayEntries from "../DisplayEntries/DisplayEntries"; 
 
 class EntriesList extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        );
+
+    componentDidMount = () => {
+    this.props.dispatch({ type: 'GET_ENTRIES' })
     }
+
+  render() {
+    return (
+      <div>
+        <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2>
+         {this.props.reduxState.getUserEntries.map( entry => {
+          return <DisplayEntries item={entry}/>
+        })}  
+      </div>
+    )
+  };
 }
 
-export default EntriesList;
+const mapStateToProps = reduxState => ({
+  reduxState,
+});
+
+export default connect(mapStateToProps)(EntriesList);
