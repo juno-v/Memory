@@ -1,6 +1,7 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+// upload user's journal entries 
 function* entry (action) {
     try {
       console.log(`hit addEntrySaga`, action.payload);

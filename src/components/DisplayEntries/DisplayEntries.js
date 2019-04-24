@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import moment from 'moment';
 
+import MapSiftedArray from "./MapSiftedArray";
+
 const styles = theme => ({
   card: {
     maxWidth: 400,
@@ -26,8 +28,12 @@ const styles = theme => ({
 
 class DisplayEntries extends Component {
 
+  state = {
+    files: [],
+  }
+
     formatDate = (date) => {
-        let entryDate =  moment(date).format("MMM Do YY"); 
+        let entryDate =  moment(date).format(); 
         return entryDate; 
     }
 
@@ -42,12 +48,14 @@ class DisplayEntries extends Component {
         />
         <CardMedia
           className={classes.media}
-          image=""
+          // image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
           title=""
         />
         <CardContent>
           <Typography component="p">
             {this.props.entry.description}
+            {/* {this.props.entry.files} */}
+            <MapSiftedArray /> 
           </Typography>
         </CardContent>
         <Button className={classes.button} variant="contained" color="secondary" > Edit Journal </Button>

@@ -5,7 +5,7 @@ import DisplayEntries from "../DisplayEntries/DisplayEntries";
 class EntriesList extends React.Component {
 
     state = {
-      id: this.props.reduxState.user.id
+      id: this.props.reduxState.user.id,
       
     }
 
@@ -17,7 +17,7 @@ class EntriesList extends React.Component {
 
     return (
       <div>
-        <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2>
+        {/* <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2> */}
          {this.props.reduxState.getUserEntries.map( (entry, index) => {
           // return 
           return (
