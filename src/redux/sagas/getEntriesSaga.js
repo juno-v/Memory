@@ -1,12 +1,14 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* getEntries() {
+function* getEntries(action) {
     try {
-    console.log(`hit getEntriesSaga`);
+    console.log(`HIT getEntriesSaga`);
+    console.log(`action.payload is: `, action.payload.id);
     
-      const response = yield axios.get('/entry/user-entries');
-      yield put({ type: 'SET_ENTRIES', payload: response.data})
+    
+    const response = yield axios.get('/entry/user-entries', action.payload);
+    yield put({ type: 'SET_ENTRIES', payload: response.data})
     }
     catch (error) {
       console.log(`Couldn't get user's entries`);

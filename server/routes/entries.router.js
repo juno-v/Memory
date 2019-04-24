@@ -31,11 +31,13 @@ router.post('/upload', async(req, res, next) =>{
 
 router.get('/user-entries', (req,res) => {
   const newEntry = req.body;
+  console.log(`hit GET for get entries `);
+  console.log(req.user.id);
+  
   const queryText = `SELECT "title", "description", "location", "date" FROM "entries"
                       WHERE "user_id" = $1;`;
-  pool.query(queryText, [newEntry.user_id])
+  pool.query(queryText, [req.user.id])
     .then((result) => { res.send(result.rows); 
-    console.log(`newEntry.user_id`, newEntry.user_id);
     
     })
     .catch((err) => {

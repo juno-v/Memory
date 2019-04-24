@@ -4,16 +4,20 @@ import DisplayEntries from "../DisplayEntries/DisplayEntries";
 
 class EntriesList extends Component {
 
+    state = {
+      id: this.props.reduxState.user.id
+    }
+
     componentDidMount = () => {
-    this.props.dispatch({ type: 'GET_ENTRIES' })
+    this.props.dispatch({ type: 'GET_ENTRIES', payload: this.state })
     }
 
   render() {
     return (
       <div>
         <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2>
-         {this.props.reduxState.getUserEntries.map( entry => {
-          return <DisplayEntries item={entry}/>
+         {this.props.reduxState.getUserEntries.map( (entry, index) => {
+          return <DisplayEntries key ={index} item={entry}/>
         })}  
       </div>
     )

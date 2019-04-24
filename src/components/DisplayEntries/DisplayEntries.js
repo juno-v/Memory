@@ -11,4 +11,10 @@ class DisplayEntries extends Component {
     }
 }
 
-export default connect()(DisplayEntries);
+
+
+const mapStateToProps = reduxState => ({
+    reduxState,
+  });
+  
+  export default connect(mapStateToProps)(DisplayEntries);
