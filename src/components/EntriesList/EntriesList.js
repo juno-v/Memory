@@ -17,7 +17,10 @@ class EntriesList extends Component {
       <div>
         <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2>
          {this.props.reduxState.getUserEntries.map( (entry, index) => {
-          return <DisplayEntries key ={index} item={entry}/>
+          // return 
+          return (
+            <li key={index}> {entry.description} </li>
+          )
         })}  
       </div>
     )

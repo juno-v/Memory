@@ -6,6 +6,7 @@ class DisplayEntries extends Component {
         return (
             <div>
                  {JSON.stringify(this.props.reduxState.getUserEntries)} 
+                 {/* {entry.description} */}
             </div>
         );
     }
@@ -15,6 +16,6 @@ class DisplayEntries extends Component {
 
 const mapStateToProps = reduxState => ({
     reduxState,
-  });
+});
   
-  export default connect(mapStateToProps)(DisplayEntries);
+export default connect(mapStateToProps)(DisplayEntries);

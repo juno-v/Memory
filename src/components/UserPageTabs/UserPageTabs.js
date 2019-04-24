@@ -54,12 +54,12 @@ class NavTabs extends React.Component {
         <div className={classes.root}>
           <AppBar position="static">
             <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
-              <LinkTab label="Create Entry" href="page1" />
-              <LinkTab label="View All Entries" href="page2" />
+              <LinkTab label= "View All Entries"href="page1" />
+              <LinkTab label= "Create Entry" href="page2" />
             </Tabs>
           </AppBar>
-          {value === 0 && <TabContainer> {<CreateEntryForm />} </TabContainer>}
-          {value === 1 && <TabContainer> {<EntriesList />} </TabContainer>}
+          {value === 1 && <TabContainer> {<CreateEntryForm />} </TabContainer>}
+          {value === 0 && <TabContainer> {<EntriesList />} </TabContainer>}
         </div>
       </NoSsr>
     );
