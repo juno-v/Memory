@@ -29,14 +29,14 @@ router.post('/upload', async(req, res, next) =>{
   }
 })
 
-router.get('/user-entries', (req,res) => {
-  const newEntry = req.body;
+router.get('/user-entries/:id', (req,res) => {
+  const newEntry = req.params.id;
   console.log(`hit GET for get entries `);
-  console.log(req.user.id);
+  console.log(newEntry);
   
   const queryText = `SELECT "title", "description", "location", "date" FROM "entries"
                       WHERE "user_id" = $1;`;
-  pool.query(queryText, [req.user.id])
+  pool.query(queryText, [newEntry])
     .then((result) => { res.send(result.rows); 
     
     })

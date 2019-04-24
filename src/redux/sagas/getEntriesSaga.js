@@ -5,9 +5,9 @@ function* getEntries(action) {
     try {
     console.log(`HIT getEntriesSaga`);
     console.log(`action.payload is: `, action.payload.id);
+    const id = action.payload.id;
     
-    
-    const response = yield axios.get('/entry/user-entries', action.payload);
+    const response = yield axios.get(`/entry/user-entries/${id}`);
     yield put({ type: 'SET_ENTRIES', payload: response.data})
     }
     catch (error) {
