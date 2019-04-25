@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // import axios from "axios"
 // import moment from 'moment';
 
+
 class CreateEntryForm extends Component {
 
     state = {
@@ -100,7 +101,7 @@ class CreateEntryForm extends Component {
 
 
     render() {
-    
+
         return (
             <div>
                     {/* <input label="upload file" type="file" onChange={this.handleFileUpload}/>

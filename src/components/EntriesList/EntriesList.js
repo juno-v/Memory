@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DisplayEntries from "../DisplayEntries/DisplayEntries"; 
 
-class EntriesList extends React.Component {
+class EntriesList extends Component {
 
     state = {
       id: this.props.reduxState.user.id,

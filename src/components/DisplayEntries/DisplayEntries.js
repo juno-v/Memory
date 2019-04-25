@@ -11,11 +11,11 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import moment from 'moment';
 
-import MapSiftedArray from "./MapSiftedArray";
+
 
 const styles = theme => ({
   card: {
-    maxWidth: 400,
+    maxWidth: 200,
   },
   media: {
     height: 0,
@@ -33,7 +33,7 @@ class DisplayEntries extends Component {
   }
 
     formatDate = (date) => {
-        let entryDate =  moment(date).format(); 
+        let entryDate =  moment(date).format("MMM Do YY"); 
         return entryDate; 
     }
 
@@ -49,16 +49,16 @@ class DisplayEntries extends Component {
         <CardMedia
           className={classes.media}
           // image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
+          image="https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/450/s300/prime-20logo-20color.png"
           title=""
         />
         <CardContent>
           <Typography component="p">
             {this.props.entry.description}
-            {/* {this.props.entry.files} */}
-            <MapSiftedArray /> 
           </Typography>
         </CardContent>
-        <Button className={classes.button} variant="contained" color="secondary" > Edit Journal </Button>
+        <Button className={classes.button} variant="contained" color="primary" > Edit Journal </Button>
+        <Button className={classes.button} variant="contained" color="secondary" > DELETE </Button>
       </Card>
     );
   }

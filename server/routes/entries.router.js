@@ -30,4 +30,21 @@ router.post('/upload-form', async(req, res, next) =>{
 })
 
 
+router.get('/user-entries/:id', (req,res) => {
+  const id = req.params.id;
+  console.log(`hit GET for get entries `);
+
+  const queryText = `SELECT "title", "description", "location", "date" FROM "entries"
+                      WHERE "user_id" = $1;`;
+  pool.query(queryText, [id])
+    .then((result) => { res.send(result.rows); 
+
+    })
+    .catch((err) => {
+      console.log(`Error getting user entries`, err);
+      res.sendStatus(500);
+    });
+})
+
+
 module.exports = router;
