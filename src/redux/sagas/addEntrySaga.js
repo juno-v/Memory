@@ -6,12 +6,7 @@ function* entry (action) {
     try {
       console.log(`hit addEntrySaga`, action.payload );
       
-      yield axios.post('/entry/image-upload', action.payload, 
-      {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      })
+      yield axios.post('/entry/upload-form', action.payload)
     } catch (error) {
       console.log(`Couldn't post entries in addEntrySaga`, action.payload, error);
       alert(`Sorry, couldn't post the entries. Try again later`);

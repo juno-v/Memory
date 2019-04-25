@@ -2,7 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.post('/', async(req, res, next) =>{
+router.post('/upload-form', async(req, res, next) =>{
   const client = await pool.connect();
   const newEntry = req.body;
   try {
