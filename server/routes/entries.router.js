@@ -7,13 +7,14 @@ router.post('/upload-form', async(req, res, next) =>{
   const newEntry = req.body;
   try {
     await client.query('BEGIN')
-    const entry = await client.query(`INSERT INTO "entries" ("user_id", "title", "date", "description", "location")
-    VALUES ($1, $2, $3, $4, $5) RETURNING id;`, [
+    const entry = await client.query(`INSERT INTO "entries" ("user_id", "title", "date", "description", "location", "url")
+    VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`, [
       newEntry.user_id,
       newEntry.title,
       newEntry.date,
       newEntry.description,
       newEntry.location,
+      newEntry.url,
     ])
     // console.log(entry.rows[0].id)
     const insertPhotoText = `INSERT INTO "images" ("file", "entries_id") VALUES($1,$2);`
@@ -34,7 +35,7 @@ router.get('/user-entries/:id', (req,res) => {
   const id = req.params.id;
   console.log(`hit GET for get entries `);
 
-  const queryText = `SELECT "title", "description", "location", "date", "id" FROM "entries"
+  const queryText = `SELECT "title", "description", "location", "date", "id", "url" FROM "entries"
                       WHERE "user_id" = $1;`;
   pool.query(queryText, [id])
     .then((result) => { res.send(result.rows); 
@@ -57,5 +58,17 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+// router.put('/:id', (req, res) => {
+//   console.log(req.params.id);
+//   const queryText = `UPDATE "entries" SET 
+//                      "title" = 'hello', "date"='11-11-1111', "description" = 'blahblahblah', "location"='da mall'
+//                      WHERE "id" = 34`;
+//   pool.query(queryText, [req.params.id])
+//     .then(() => { res.sendStatus(200); })
+//     .catch((err) => {
+//       console.log('Error deleting entry', err);
+//       res.sendStatus(500);
+//     });
+// });
 
 module.exports = router;

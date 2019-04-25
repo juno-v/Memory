@@ -5,6 +5,7 @@ import userSaga from './userSaga';
 import addEntrySaga from './addEntrySaga'
 import getEntriesSaga from "./getEntriesSaga"; 
 import deleteEntrySaga from "./deleteEntrySaga";
+import editEntrySaga from "./editEntrySaga";
 
 
 // rootSaga is the primary saga.
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     addEntrySaga(), 
     getEntriesSaga(),
     deleteEntrySaga(),
+    editEntrySaga(),
 
   ]);
 }

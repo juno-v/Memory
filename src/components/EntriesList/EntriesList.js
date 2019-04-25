@@ -17,6 +17,7 @@ class EntriesList extends Component {
 
     return (
       <div>
+       {this.props.state}
         {/* <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2> */}
          {this.props.reduxState.getUserEntries.map( (entry, index) => {
           // return 
