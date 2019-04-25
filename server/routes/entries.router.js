@@ -34,7 +34,7 @@ router.get('/user-entries/:id', (req,res) => {
   const id = req.params.id;
   console.log(`hit GET for get entries `);
 
-  const queryText = `SELECT "title", "description", "location", "date" FROM "entries"
+  const queryText = `SELECT "title", "description", "location", "date", "id" FROM "entries"
                       WHERE "user_id" = $1;`;
   pool.query(queryText, [id])
     .then((result) => { res.send(result.rows); 
@@ -45,6 +45,17 @@ router.get('/user-entries/:id', (req,res) => {
       res.sendStatus(500);
     });
 })
+
+router.delete('/:id', (req, res) => {
+  console.log(req.params.id);
+  const queryText = 'DELETE FROM "entries" WHERE id=$1';
+  pool.query(queryText, [req.params.id])
+    .then(() => { res.sendStatus(200); })
+    .catch((err) => {
+      console.log('Error deleting entry', err);
+      res.sendStatus(500);
+    });
+});
 
 
 module.exports = router;

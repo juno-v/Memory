@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import moment from 'moment';
+import axios from "axios"
 
 
 
@@ -37,6 +38,19 @@ class DisplayEntries extends Component {
         return entryDate; 
     }
 
+    deleteJournal = (event) => {
+      console.log(`hit delete!`);
+      console.log(this.props.entry.id);
+      this.props.dispatch({type: 'DELETE_ENTRY', payload: this.props.entry.id})
+      
+      
+    }
+
+    editJournal = () => {
+      console.log(`hit edit!`);
+      
+    }
+    
   render() {
     const { classes } = this.props;
 
@@ -55,10 +69,15 @@ class DisplayEntries extends Component {
         <CardContent>
           <Typography component="p">
             {this.props.entry.description}
+            {this.props.entry.id}
           </Typography>
         </CardContent>
-        <Button className={classes.button} variant="contained" color="primary" > Edit Journal </Button>
-        <Button className={classes.button} variant="contained" color="secondary" > DELETE </Button>
+        <Button className={classes.button} variant="contained" color="primary" 
+          onClick={this.editJournal}
+          > Edit Journal </Button>
+        <Button className={classes.button} variant="contained" color="secondary" 
+          onClick={this.deleteJournal} 
+          > DELETE </Button>
       </Card>
     );
   }
