@@ -30,7 +30,8 @@ const styles = theme => ({
 class DisplayEntries extends Component {
 
   state = {
-    files: [],
+    id: this.props.reduxState.user.id,
+    entryId: this.props.entry.id
   }
 
     formatDate = (date) => {
@@ -41,16 +42,18 @@ class DisplayEntries extends Component {
     deleteJournal = (event) => {
       console.log(`hit delete!`);
       console.log(this.props.entry.id);
-      this.props.dispatch({type: 'DELETE_ENTRY', payload: this.props.entry.id})
+      console.log(`user id is`, this.state.id);
       
-      
+
+      this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state })
+    
     }
 
     editJournal = () => {
       console.log(`hit edit!`);
       
     }
-    
+
   render() {
     const { classes } = this.props;
 
