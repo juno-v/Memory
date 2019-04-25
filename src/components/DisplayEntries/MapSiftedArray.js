@@ -25,7 +25,7 @@ class MapSiftedArray extends Component {
         //   console.log(`this.state.file is: `, this.state.files[0].LastModified);
           let imageDate = this.state.files[0].LastModified
           this.formatDate(imageDate); 
-          console.log(`LFM IS: `, imageDate);      
+          // console.log(`LFM IS: `, imageDate);      
         })
     
         .catch(error => {
