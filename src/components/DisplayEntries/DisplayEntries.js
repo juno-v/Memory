@@ -10,8 +10,10 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import moment from 'moment';
-import axios from "axios"
-import { runInThisContext } from 'vm';
+
+// unused imports , delete when done 
+// import axios from "axios"
+// import { runInThisContext } from 'vm';
 
 import TextField from '@material-ui/core/TextField';
 
@@ -33,10 +35,18 @@ const styles = theme => ({
 class DisplayEntries extends Component {
 
   state = {
+    newEntry: {
+      title: this.props.entry.title,
+        url: this.props.entry.url,
+        date: this.props.entry.date,
+        location: this.props.entry.location, 
+        description: this.props.entry.description,         
+        file: '',  
+    },
+
     id: this.props.reduxState.user.id,
     entryId: this.props.entry.id,
     flip: true, 
-    
   }
 
     formatDate = (date) => {
@@ -49,9 +59,7 @@ class DisplayEntries extends Component {
       console.log(this.props.entry.id);
       console.log(`user id is`, this.state.id);
     
-    
       this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state })
-    
     }
 
     editJournal = (event) => {
@@ -59,7 +67,6 @@ class DisplayEntries extends Component {
       this.setState({
         flip: !this.state.flip, 
       })
-      
     }
 
     viewJournal = () => {
@@ -67,15 +74,36 @@ class DisplayEntries extends Component {
       
     }
 
+    handleNameChange = (propertyName) => {   
+      return(event) =>{
+      this.setState({
+          newEntry: {
+              ...this.state.newEntry,
+              [propertyName]: event.target.value,
+            }
+        });
+      }    
+    }
+
     flip = () => {
       this.setState({
         flip: !this.state.flip, 
+        ...this.state.newEntry, 
+        newEntry: {
+          title: '',
+            url: '',
+            date: '',
+            location: '', 
+            description: '',         
+            file: '',
+             
+        }
       })
+    this.props.dispatch({type: 'EDIT_ENTRY', payload: this.state });
     }
 
   render() {
     const { classes } = this.props;
-    const state = this.props.state
 
     return (
       <div>
@@ -93,11 +121,13 @@ class DisplayEntries extends Component {
         />
         <CardContent>
           <Typography component="p">
+            {/* Description: <br /> */}
             {this.props.entry.description} <br />
+            {/* Url: <br /> */}
             {this.props.entry.url} <br />
+            {/* Location: <br /> */}
             {this.props.entry.location}
             <br />
-          {this.props.state}
           </Typography>
         </CardContent>
 
@@ -115,25 +145,25 @@ class DisplayEntries extends Component {
       </Card>
       :
 
-      <form> 
+      <div>
       
-                        <TextField type='text' value={this.props.entry.title} /* onChange={this.handleNameChange('title')}  */
-                        label="Insert Journal Title"/>
-                        <br/>
-                        <TextField type='text' value={this.props.entry.url} /* onChange={this.handleNameChange('url')}  */
-                        label="Insert Youtube URL"/>
-                        <br/>
-                        <TextField id="date" label="Select Date" type="date" defaultValue={this.formatDate(this.props.entry.date)} /* onChange={this.handleNameChange('date')} */ InputLabelProps={{ shrink: true,}}/>
-                        <br/>
-                        <TextField type='text' value={this.props.entry.location} /* onChange={this.handleNameChange('location')} */
-                        label="Insert Location" />
-                        <br/>
-                        <TextField type='text' value={this.props.entry.description} /* onChange={this.handleNameChange('description')} */ 
-                        label="Insert Description"/>
-                        <br/>
-                        <br />
-                        <Button onClick={this.flip} type='submit' color="primary" variant="contained"> Save Updated Entry </Button> 
-                    </form>
+          <TextField type='text' value={this.state.newEntry.title} onChange={this.handleNameChange('title')} 
+          label="Insert Journal Title"/>
+           <br/>
+          <TextField type='text' value={this.state.newEntry.url} onChange={this.handleNameChange('url')} 
+          label="Insert Youtube URL"/>
+          <br/>
+          <TextField id="date" label="Select Date" type="date" defaultValue={this.formatDate(this.state.newEntry.date)} onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}/>
+          <br/>
+          <TextField type='text' value={this.state.newEntry.location} onChange={this.handleNameChange('location')}
+          label="Insert Location" />
+          <br/>
+          <TextField type='text' value={this.state.newEntry.description} onChange={this.handleNameChange('description')} 
+          label="Insert Description"/>
+          <br/>
+          <br /> 
+          <Button onClick={this.flip} type='submit' color="primary" variant="contained"> Save Updated Entry </Button> 
+          </div>
       } 
       
       </div>

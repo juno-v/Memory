@@ -7,7 +7,7 @@ function* deleteEntries(action) {
     console.log(`action.payload is: `, action.payload);
     const id = action.payload.entryId
     
-    const response = yield axios.delete(`/entry/${id}`);
+    yield axios.delete(`/entry/${id}`);
     yield put({ type: 'GET_ENTRIES', payload: action.payload})
     }
     catch (error) {

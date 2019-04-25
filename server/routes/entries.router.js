@@ -58,17 +58,27 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-// router.put('/:id', (req, res) => {
-//   console.log(req.params.id);
-//   const queryText = `UPDATE "entries" SET 
-//                      "title" = 'hello', "date"='11-11-1111', "description" = 'blahblahblah', "location"='da mall'
-//                      WHERE "id" = 34`;
-//   pool.query(queryText, [req.params.id])
-//     .then(() => { res.sendStatus(200); })
-//     .catch((err) => {
-//       console.log('Error deleting entry', err);
-//       res.sendStatus(500);
-//     });
-// });
+router.put('/edit/:id', (req, res) => {
+  console.log(req.params.id);
+  console.log(req.body);
+  const entry = req.body.newEntry;
+  console.log(entry.title);
+  console.log(entry.date);
+  console.log(entry.description);
+  console.log(entry.location);
+  console.log(entry.url);
+  console.log(req.body.entryId);
+  
+
+  const queryText = `UPDATE "entries" SET 
+                     "title" = $1, "date" = $2, "description" = $3, "location"= $4, "url" = $5
+                     WHERE "id" = $6`;
+  pool.query(queryText, [entry.title, entry.date, entry.description, entry.location, entry.url, req.body.entryId])
+    .then(() => { res.sendStatus(200); })
+    .catch((err) => {
+      console.log('Error deleting entry', err);
+      res.sendStatus(500);
+    });
+});
 
 module.exports = router;

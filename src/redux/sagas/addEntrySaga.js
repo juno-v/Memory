@@ -1,4 +1,4 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest /* ,put */ } from 'redux-saga/effects';
 import axios from 'axios';
 
 // upload user's journal entries 

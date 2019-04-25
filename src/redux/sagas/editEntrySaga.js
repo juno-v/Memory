@@ -4,11 +4,13 @@ import axios from 'axios';
 function* editEntries(action) {
     try {
     console.log(`HIT editEntries`);
-    console.log(`action.payload is: `, action.payload.id);
-    const id = action.payload.id;
+    console.log(`action.payload is: `, action.payload);
+    console.log(`user.id`, action.payload.id );
+    const id = action.payload.id
     
-    // const response = yield axios.get(`/entry/user-entries/${id}`);
-    // yield put({ type: 'SET_ENTRIES', payload: response.data})
+    
+     const response = yield axios.put(`/entry/edit/${id}`, action.payload);
+    yield put({ type: 'GET_ENTRIES' , payload: response.data })
     }
     catch (error) {
       console.log(`Couldn't get user's entries`);
