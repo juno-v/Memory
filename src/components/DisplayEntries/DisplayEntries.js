@@ -10,19 +10,17 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import moment from 'moment';
-
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import classnames from 'classnames';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
+import TextField from '@material-ui/core/TextField';
 
 
 // unused imports , delete when done 
 // import axios from "axios"
 // import { runInThisContext } from 'vm';
-
-import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   card: {
@@ -50,17 +48,17 @@ class DisplayEntries extends Component {
         expanded: false,
     },
 
-    id: this.props.reduxState.user.id,
-    entryId: this.props.entry.id,
-    flip: true, 
-  }
+      id: this.props.reduxState.user.id,
+      entryId: this.props.entry.id,
+      flip: true, 
+    }
 
     formatDate = (date) => {
         let entryDate =  moment(date).format("YYYY-MM-DD"); 
         return entryDate; 
     }
 
-    deleteJournal = (event) => {
+    deleteJournal = () => {
       console.log(`hit delete!`);
       console.log(this.props.entry.id);
       console.log(`user id is`, this.state.id);
@@ -68,7 +66,7 @@ class DisplayEntries extends Component {
       this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });
     }
 
-    editJournal = (event) => {
+    editJournal = () => {
       console.log(`hit edit!`);
       this.setState({
         flip: !this.state.flip, 
@@ -87,9 +85,10 @@ class DisplayEntries extends Component {
     }
 
     flip = () => {
+      console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
       this.setState({
         flip: !this.state.flip, 
-        ...this.state.newEntry, 
+        ...this.state.newEntry,
         newEntry: {
           title: '',
             url: '',
@@ -97,12 +96,10 @@ class DisplayEntries extends Component {
             location: '', 
             description: '',         
             file: '',
-             
         }
       })
     this.props.dispatch({type: 'EDIT_ENTRY', payload: this.state });
     // this.props.dispatch({ type: 'GET_ENTRIES', payload: this.state});
-
   }
 
   websiteUrl = (url) => {
@@ -111,7 +108,13 @@ class DisplayEntries extends Component {
   }
 
   handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
+    console.log(`STATE IS???? `, this.state)
+    console.log(`reduxState is???? `, this.props.reduxState.getUserEntries);
+    
+    this.setState(
+      ({ 
+      expanded: !this.state.expanded 
+    }));
   };
 
   render() {
@@ -180,10 +183,9 @@ class DisplayEntries extends Component {
       :
 
       <div>
-      
           <TextField type='text' value={this.state.newEntry.title} onChange={this.handleNameChange('title')} 
           label="Insert Journal Title"/>
-           <br/>
+          <br/>
           <TextField type='text' value={this.state.newEntry.url} onChange={this.handleNameChange('url')} 
           label="Insert Youtube URL"/>
           <br/>
@@ -197,7 +199,8 @@ class DisplayEntries extends Component {
           <br/>
           <br /> 
           <Button onClick={this.flip} type='submit' color="primary" variant="contained"> Save Updated Entry </Button> 
-          </div>
+      </div>
+          
       } 
       
       </div>
@@ -216,4 +219,4 @@ const mapStateToProps = reduxState => ({
 export default compose(
     withStyles(styles),
     connect(mapStateToProps, null)
-  )(DisplayEntries);
+)(DisplayEntries);
