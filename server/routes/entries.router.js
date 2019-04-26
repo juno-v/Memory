@@ -36,7 +36,9 @@ router.get('/user-entries/:id', (req,res) => {
   console.log(`hit GET for get entries `);
 
   const queryText = `SELECT "title", "description", "location", "date", "id", "url" FROM "entries"
-                      WHERE "user_id" = $1;`;
+                      WHERE "user_id" = $1
+                      ORDER BY "id" 
+                      `;
   pool.query(queryText, [id])
     .then((result) => { res.send(result.rows); 
 

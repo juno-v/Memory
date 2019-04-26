@@ -47,7 +47,6 @@ class DisplayEntries extends Component {
         file: '',  
         expanded: false,
     },
-
       id: this.props.reduxState.user.id,
       entryId: this.props.entry.id,
       flip: true, 
@@ -86,20 +85,19 @@ class DisplayEntries extends Component {
 
     flip = () => {
       console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
+      this.props.dispatch({type: 'EDIT_ENTRY', payload: this.state });
       this.setState({
         flip: !this.state.flip, 
-        ...this.state.newEntry,
-        newEntry: {
-          title: '',
-            url: '',
-            date: '',
-            location: '', 
-            description: '',         
-            file: '',
-        }
+        // ...this.state.newEntry,
+        // newEntry: {
+        //   title: '',
+        //     url: '',
+        //     date: '',
+        //     location: '', 
+        //     description: '',         
+        //     file: '',
+        // }
       })
-    this.props.dispatch({type: 'EDIT_ENTRY', payload: this.state });
-    // this.props.dispatch({ type: 'GET_ENTRIES', payload: this.state});
   }
 
   websiteUrl = (url) => {
