@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -11,13 +11,18 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import moment from 'moment';
 
+import CardActions from '@material-ui/core/CardActions';
+import IconButton from '@material-ui/core/IconButton';
+import classnames from 'classnames';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Collapse from '@material-ui/core/Collapse';
+
+
 // unused imports , delete when done 
 // import axios from "axios"
 // import { runInThisContext } from 'vm';
 
 import TextField from '@material-ui/core/TextField';
-
-
 
 const styles = theme => ({
   card: {
@@ -42,6 +47,7 @@ class DisplayEntries extends Component {
         location: this.props.entry.location, 
         description: this.props.entry.description,         
         file: '',  
+        expanded: false,
     },
 
     id: this.props.reduxState.user.id,
@@ -59,7 +65,7 @@ class DisplayEntries extends Component {
       console.log(this.props.entry.id);
       console.log(`user id is`, this.state.id);
     
-      this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state })
+      this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });
     }
 
     editJournal = (event) => {
@@ -67,11 +73,6 @@ class DisplayEntries extends Component {
       this.setState({
         flip: !this.state.flip, 
       })
-    }
-
-    viewJournal = () => {
-      console.log(`hit viewJournal!`);
-      
     }
 
     handleNameChange = (propertyName) => {   
@@ -100,10 +101,22 @@ class DisplayEntries extends Component {
         }
       })
     this.props.dispatch({type: 'EDIT_ENTRY', payload: this.state });
-    }
+    // this.props.dispatch({ type: 'GET_ENTRIES', payload: this.state});
+
+  }
+
+  websiteUrl = (url) => {
+    let gitHubLink = <a href={url} rel="noopener noreferrer" target="_blank"> Website </a>
+    return gitHubLink; 
+  }
+
+  handleExpandClick = () => {
+    this.setState(state => ({ expanded: !state.expanded }));
+  };
 
   render() {
     const { classes } = this.props;
+    
 
     return (
       <div>
@@ -121,27 +134,48 @@ class DisplayEntries extends Component {
         />
         <CardContent>
           <Typography component="p">
-            {/* Description: <br /> */}
-            {this.props.entry.description} <br />
-            {/* Url: <br /> */}
-            {this.props.entry.url} <br />
-            {/* Location: <br /> */}
-            {this.props.entry.location}
+            Click to read more! 
             <br />
           </Typography>
         </CardContent>
-
-        <Button className={classes.button}  value="1" variant="contained" color="primary" 
-          onClick={this.editJournal}
-          
-          > Edit Journal </Button>
-        <Button className={classes.button} variant="contained" color="secondary" 
-          onClick={this.deleteJournal} 
-          > DELETE </Button>
-
-        <Button onClick={this.viewJournal}  variant="contained" color="primary" 
-          > Read This Journal </Button>
-          <br /> 
+        <CardActions className={classes.actions} disableActionSpacing>
+       
+       <IconButton
+         className={classnames(classes.expand, {
+           [classes.expandOpen]: this.state.expanded,
+         })}
+         onClick={this.handleExpandClick}
+         aria-expanded={this.state.expanded}
+         aria-label="Show more"
+       >
+         <ExpandMoreIcon />
+       </IconButton>
+     </CardActions>
+     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+       <CardContent>
+         <Typography >Description:</Typography>
+            <Typography >
+            {this.props.entry.description}
+            </Typography>
+         <Typography > A Website: </Typography>
+            <Typography >
+            {this.websiteUrl(this.props.entry.url)}
+            </Typography>
+         <Typography > Location: </Typography>
+            <Typography > 
+            {this.props.entry.location}
+            </Typography>
+         <Typography > Journal actions </Typography> <hr /> 
+         <Typography>
+              <Button className={classes.button}  value="1" variant="contained" color="primary" 
+              onClick={this.editJournal}
+              > Edit Journal </Button> <br />
+              <Button className={classes.button} variant="contained" color="secondary" 
+                onClick={this.deleteJournal}
+                > DELETE </Button> <br />
+          </Typography>
+         </CardContent>
+        </Collapse>
       </Card>
       :
 

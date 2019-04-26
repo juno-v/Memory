@@ -4,7 +4,8 @@ import axios from 'axios';
 // upload user's journal entries 
 function* entry (action) {
     try {
-      console.log(`hit addEntrySaga`, action.payload );
+      console.log(`hit addEntrySaga` );
+      console.log(`PAYLOAD: `, action.payload);
       
       yield axios.post('/entry/upload-form', action.payload);
       // yield put({ type: 'GET_ENTRIES'} );
