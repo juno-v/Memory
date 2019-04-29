@@ -28,7 +28,8 @@ const styles = theme => ({
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '100%', // 16:9
+    marginTop:'30'
   },
     button: {
       margin: theme.spacing.unit,

@@ -50,7 +50,6 @@ function uploadToS3(file, res) {
             Bucket: BUCKET_NAME,
             Key: file.filename,
             Body: data,
-            ContentType: type.mime,
           };
           s3bucket.upload(params, function (error, data) {
             if (error) {

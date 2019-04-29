@@ -15,8 +15,7 @@ class CreateEntryForm extends Component {
             description: '',
             file: null,
     }
-
-  }
+}
 
      // set state to become text fields' values 
      handleNameChange = (propertyName) => {   
@@ -34,10 +33,8 @@ class CreateEntryForm extends Component {
         event.preventDefault();
         console.log(`state is: `, this.state.newEntry)
         // dispatch to saga to post form values 
-
         this.setState({
         newEntry: {
-            // id: this.state.newEntry.id + 1,
             user_id: this.props.reduxState.user.id,
             title: '',
             url: '',
@@ -66,9 +63,7 @@ handleFileChange = (propertyName) => {
         return (
             <div>
                
-                    
-                    
-                    <form onSubmit={this.addEntry}>
+                    <form onSubmit={this.addEntry} /* encType="multipart/form-data" */ >
                     <input type="file" name="file" onChange={this.handleFileChange('file')} />
                         <br/>
                         <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')} 
@@ -86,7 +81,6 @@ handleFileChange = (propertyName) => {
                         label="Insert Description"/>
                         <br/>
                         <br />
-                        {/* onClick={this.addEntry} */}
                         <Button  type='submit' color="primary" variant="contained"> Create Entry </Button> 
                     </form>
             </div>

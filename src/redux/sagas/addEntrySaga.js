@@ -19,7 +19,7 @@ function* entry (action) {
       yield axios.post('/entry/upload-form', data, { headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
-        // 'Content-Type': file.type,
+        // 'Content-Type': 'image/png', 
         'content-type': 'multipart/form-data'
 
     }});
