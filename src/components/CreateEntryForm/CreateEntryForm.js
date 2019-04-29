@@ -1,8 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
-import UploadFile from './UploadFile';
+import RawInputUpload from "./RawInputField";
+import Images from "./Images"; 
+
 // import axios from "axios"
 // import moment from 'moment';
 
@@ -58,7 +60,8 @@ class CreateEntryForm extends Component {
 
         return (
             <div>
-                <Fragment>   <UploadFile /> </Fragment>
+                    <Images /> 
+                   <RawInputUpload />
                     {/* <input label="upload file" type="file" onChange={this.handleFileUpload}/>
                     <button onClick={this.submitFile}>Upload your image</button> */}
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DisplayEntries from "../DisplayEntries/DisplayEntries"; 
+import './Entries.css'
 
 class EntriesList extends Component {
 
@@ -17,12 +18,14 @@ class EntriesList extends Component {
 
     return (
       <div>
-       {this.props.state}
+       
         {/* <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2> */}
          {this.props.reduxState.getUserEntries.map( (entry, index) => {
           // return 
           return (
-            <DisplayEntries key={index} entry={entry} /> 
+           <section key={index} className="cards" > 
+            <DisplayEntries entry={entry} /> 
+           </section> 
           )
         })}  
       </div>

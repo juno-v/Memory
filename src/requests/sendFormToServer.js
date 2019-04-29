@@ -3,6 +3,8 @@ import axios from 'axios';
 const verbose = false; // turns on and off console.logs
 
 export const sendFileToServer = file => {
+    console.log(`got to request folder sendFileToServer`);
+    
     const data = new FormData();
     data.append('file', file);
     axios.post('api/post/image', data, { headers: {

@@ -10,7 +10,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-const awsRouter = require('./routes/aws.router');
+const postRouter = require('./routes/post.router');
 const entryRouter = require('./routes/entries.router');
 
 // Body parser middleware
@@ -24,13 +24,13 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static('build'));
+
 /* Routes */
 app.use('/api/user', userRouter);
-// app.use('/test-upload', awsRouter);
+app.use('/api/post', postRouter);
 app.use('/entry', entryRouter);
 
-// Serve static files
-app.use(express.static('build'));
 
 // App Set //
 const PORT = process.env.PORT || 5000;
