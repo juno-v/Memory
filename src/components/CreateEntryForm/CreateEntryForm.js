@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
-import RawInputUpload from "./RawInputField";
-import Images from "./Images"; 
-
-// import axios from "axios"
-// import moment from 'moment';
-
 
 class CreateEntryForm extends Component {
 
@@ -29,7 +23,7 @@ class CreateEntryForm extends Component {
         return(event) =>{
         this.setState({
             newEntry: {
-                ...this.state.newEntry,
+                ...this.state.newEntry, 
                 [propertyName]: event.target.value,
             }
         });
@@ -40,6 +34,7 @@ class CreateEntryForm extends Component {
         event.preventDefault();
         console.log(`state is: `, this.state.newEntry)
         // dispatch to saga to post form values 
+
         this.setState({
         newEntry: {
             // id: this.state.newEntry.id + 1,
@@ -48,11 +43,21 @@ class CreateEntryForm extends Component {
             url: '',
             date: '',
             location: '', 
-            description: '',         
-            file: '',  
+            description: '',          
         }
     });  
     this.props.dispatch({ type: 'ADD_ENTRY', payload: this.state.newEntry })
+}
+
+handleFileChange = (propertyName) => { 
+    return(event) =>{
+        this.setState({
+            newEntry: {
+                ...this.state.newEntry, 
+                [propertyName]: event.target.files[0],
+            }
+        });
+    }    
 }
 
 
@@ -60,13 +65,12 @@ class CreateEntryForm extends Component {
 
         return (
             <div>
-                    <Images /> 
-                   <RawInputUpload />
-                    {/* <input label="upload file" type="file" onChange={this.handleFileUpload}/>
-                    <button onClick={this.submitFile}>Upload your image</button> */}
-
-                    <br/>
-                    <form>
+               
+                    
+                    
+                    <form onSubmit={this.addEntry}>
+                    <input type="file" name="file" onChange={this.handleFileChange('file')} />
+                        <br/>
                         <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')} 
                         label="Insert Journal Title"/>
                         <br/>
@@ -82,7 +86,8 @@ class CreateEntryForm extends Component {
                         label="Insert Description"/>
                         <br/>
                         <br />
-                        <Button onClick={this.addEntry} type='submit' color="primary" variant="contained"> Create Entry </Button> 
+                        {/* onClick={this.addEntry} */}
+                        <Button  type='submit' color="primary" variant="contained"> Create Entry </Button> 
                     </form>
             </div>
         );

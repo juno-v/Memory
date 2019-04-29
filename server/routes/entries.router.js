@@ -1,34 +1,106 @@
 const express = require('express');
-const pool = require('../modules/pool');
 const router = express.Router();
 
-router.post('/upload-form', async(req, res, next) =>{
-  const client = await pool.connect();
-  const newEntry = req.body;
-  try {
-    await client.query('BEGIN')
-    const entry = await client.query(`INSERT INTO "entries" ("user_id", "title", "date", "description", "location", "url")
-    VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`, [
-      newEntry.user_id,
-      newEntry.title,
-      newEntry.date,
-      newEntry.description,
-      newEntry.location,
-      newEntry.url,
-    ])
-    // console.log(entry.rows[0].id)
-    const insertPhotoText = `INSERT INTO "images" ("file", "entries_id") VALUES($1,$2);`
-    const insertPhotoValues = [newEntry.file, entry.rows[0].id]
-    await client.query(insertPhotoText, insertPhotoValues)
-    await client.query('COMMIT')
-    res.sendStatus(201)
-  }catch (e) {
-    await client.query('ROLLBACK')
-    throw e
-  } finally {
-    client.release()
-  }
+const multer  = require('multer');
+const multerDest ='../uploads';
+const upload = multer({ dest: multerDest });
+
+const pool = require('../modules/pool');
+const fs    = require('fs-extra');
+const AWS   = require('aws-sdk');
+
+const BUCKET_NAME     = process.env.bucket_name;
+const IAM_USER_KEY    = process.env.aws_access_key_id;
+const IAM_USER_SECRET = process.env.aws_secret_access_key;
+ 
+const verbose = false; //turns on and off console.logs
+
+const uploadPost = async (req, res) => {
+  console.log(`Hit uploadPost!`);
+  console.log(`req.file is: `, req.file);
+  console.log(`req.body.title is: `, req.body.title);
+  console.log(`req.body.url is : `, req.body.url);
+  console.log(`req.body.date is : `, req.body.date);
+  console.log(`req.body.location is : `, req.body.location);
+  console.log(`req.body.description is : `, req.body.description);
+  
+  
+  let media_key = await uploadToS3(req.file, res);
+  uploadToSQL(req, media_key, res);
+  res.sendStatus(201);
+}
+
+function uploadToS3(file, res) {
+  console.log(`Hit uploadToS3!`);
+  return new Promise(resolve => {
+    
+    fs.readFile(file.path)
+      .then(data => {
+        console.log(`Hit uploadToS3.then!`);
+        verbose && console.log(`file read: `, data);
+        let s3bucket = new AWS.S3({
+          accessKeyId: IAM_USER_KEY,
+          secretAccessKey: IAM_USER_SECRET,
+          Bucket: BUCKET_NAME,
+          signatureVersion: 'v4',
+          region: 'us-east-2',
+        });
+        s3bucket.createBucket(function () {
+          var params = {
+            Bucket: BUCKET_NAME,
+            Key: file.filename,
+            Body: data,
+          };
+          s3bucket.upload(params, function (error, data) {
+            if (error) {
+              res.sendStatus(500);
+            }
+            resolve(data.Key);
+          })
+        })
+      })
+      .catch(error => {
+        res.sendStatus(500);
+      })
+  })
+}
+
+
+  const uploadToSQL = async(req, media_key, res) => {
+    
+    const newEntry = req.body;
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN')
+      const entry = await client.query(`INSERT INTO "entries" ("user_id", "title", "date", "description", "location", "url")
+      VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`, [
+        newEntry.user_id,
+        newEntry.title,
+        newEntry.date,
+        newEntry.description,
+        newEntry.location,
+        newEntry.url,
+      ])
+      // console.log(entry.rows[0].id)
+      const insertPhotoText = `INSERT INTO "images" ("file", "entries_id") VALUES($1,$2);`
+      const insertPhotoValues = [media_key, entry.rows[0].id]
+      await client.query(insertPhotoText, insertPhotoValues)
+      await client.query('COMMIT')
+    } catch (e) {
+      await client.query('ROLLBACK')
+      throw e
+    } finally {
+      client.release();
+      
+    }
+}
+
+router.post('/upload-form', upload.single('file'), async(req, res) =>{
+  uploadPost(req, res);
 })
+
+
+
 
 
 router.get('/user-entries/:id', (req,res) => {

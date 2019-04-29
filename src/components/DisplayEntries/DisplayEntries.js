@@ -88,18 +88,8 @@ class DisplayEntries extends Component {
       console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
       this.setState({
         flip: !this.state.flip, 
-        // ...this.state.newEntry,
-        // newEntry: {
-        //   title: '',
-        //     url: '',
-        //     date: '',
-        //     location: '', 
-        //     description: '',         
-        //     file: '',
-        // }
       })
     this.props.dispatch({type: 'EDIT_ENTRY', payload: this.state });
-    // this.props.dispatch({ type: 'GET_ENTRIES', payload: this.state});
   }
 
   websiteUrl = (url) => {
