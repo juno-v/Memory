@@ -21,7 +21,6 @@ class EntriesList extends Component {
        
         {/* <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2> */}
          {this.props.reduxState.getUserEntries.map( (entry, index) => {
-          // return 
           return (
            <section key={index} className="cards" > 
             <DisplayEntries entry={entry} /> 

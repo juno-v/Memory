@@ -121,13 +121,12 @@ class DisplayEntries extends Component {
         />
         <CardMedia
           className={classes.media}
-          // image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
-          image="https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/450/s300/prime-20logo-20color.png"
-          title=""
+          image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
+          
         />
         <CardContent>
           <Typography component="p">
-            Click to read more! 
+            Click to read more!
             <br />
           </Typography>
         </CardContent>

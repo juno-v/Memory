@@ -46,10 +46,11 @@ function uploadToS3(file, res) {
           region: 'us-east-2',
         });
         s3bucket.createBucket(function () {
-          var params = {
+          const params = {
             Bucket: BUCKET_NAME,
             Key: file.filename,
             Body: data,
+            ContentType: type.mime,
           };
           s3bucket.upload(params, function (error, data) {
             if (error) {
@@ -81,7 +82,6 @@ function uploadToS3(file, res) {
         newEntry.location,
         newEntry.url,
       ])
-      // console.log(entry.rows[0].id)
       const insertPhotoText = `INSERT INTO "images" ("file", "entries_id") VALUES($1,$2);`
       const insertPhotoValues = [media_key, entry.rows[0].id]
       await client.query(insertPhotoText, insertPhotoValues)
@@ -107,9 +107,10 @@ router.get('/user-entries/:id', (req,res) => {
   const id = req.params.id;
   console.log(`hit GET for get entries `);
 
-  const queryText = `SELECT "title", "description", "location", "date", "id", "url" FROM "entries"
-                      WHERE "user_id" = $1
-                      ORDER BY "date"`;
+  const queryText = `SELECT "entries"."title", "entries"."description", "entries"."location", "entries"."date", "entries"."id", "entries"."url", "images"."file" FROM "entries"
+                      JOIN "images" ON "images"."entries_id" = "entries"."id"
+                      WHERE "entries"."user_id" = $1
+                      ORDER BY "entries"."date"`;
   pool.query(queryText, [id])
     .then((result) => { res.send(result.rows); 
 
