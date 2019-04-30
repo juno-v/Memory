@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+      button: {
+        margin: theme.spacing.unit,
+        width: 170,
+      },
+      text: {
+          width: 500,
+      }
+  });
 
 class CreateEntryForm extends Component {
 
@@ -17,7 +30,7 @@ class CreateEntryForm extends Component {
     }
 }
 
-     // set state to become text fields' values 
+     // set state for onChange of textfields 
      handleNameChange = (propertyName) => {   
         return(event) =>{
         this.setState({
@@ -29,6 +42,7 @@ class CreateEntryForm extends Component {
     }    
 }
 
+    // on click, dispatch new textfield values to addEntrySaga
     addEntry = (event) => {
         event.preventDefault();
         console.log(`state is: `, this.state.newEntry)
@@ -46,50 +60,63 @@ class CreateEntryForm extends Component {
     this.props.dispatch({ type: 'ADD_ENTRY', payload: this.state.newEntry })
 }
 
-handleFileChange = (propertyName) => { 
-    return(event) =>{
-        this.setState({
-            newEntry: {
-                ...this.state.newEntry, 
-                [propertyName]: event.target.files[0],
-            }
-        });
-    }    
-}
+    // set state for onChange of upload file 
+    handleFileChange = (propertyName) => { 
+        return(event) =>{
+            this.setState({
+                newEntry: {
+                    ...this.state.newEntry, 
+                    [propertyName]: event.target.files[0],
+                }
+            });
+        }    
+    }
 
 
     render() {
 
+        const { classes } = this.props;
+
         return (
-            <div>
-               
-                    <form onSubmit={this.addEntry} /* encType="multipart/form-data" */ >
-                    <input type="file" name="file" onChange={this.handleFileChange('file')} />
-                        <br/>
-                        <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')} 
-                        label="Insert Journal Title"/>
-                        <br/>
+
+            <div className="CreateEntryFormDiv" >
+                <div className="CreateEntryChildDiv" >
+                    <form onSubmit={this.addEntry} className="materialForm" >
+                        <input type="file" name="file" onChange={this.handleFileChange('file')} /> <br/>
+                        
+                        <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')}
+                        label="Insert Journal Title" className={classes.text} /> <br />
+                        
                         <TextField type='text' value={this.state.newEntry.url || ''} onChange={this.handleNameChange('url')} 
-                        label="Insert Youtube URL"/>
-                        <br/>
-                        <TextField id="date" label="Select Date" type="date" value={this.state.newEntry.date || ''} onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}/>
-                        <br/>
+                        label="Insert Youtube URL" className={classes.text}/> <br/>
+                        
+                        <TextField id="date" label="Select Date" type="date" value={this.state.newEntry.date || ''} 
+                        onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}
+                        className={classes.text} />  <br/>
+                        
                         <TextField type='text' value={this.state.newEntry.location || ''} onChange={this.handleNameChange('location')}
-                        label="Insert Location" />
-                        <br/>
+                        label="Insert Location" className={classes.text} /> <br/>
+                        
                         <TextField type='text' value={this.state.newEntry.description || ''} onChange={this.handleNameChange('description')} 
-                        label="Insert Description"/>
-                        <br/>
-                        <br />
-                        <Button  type='submit' color="primary" variant="contained"> Create Entry </Button> 
+                        label="Insert Description"  className={classes.text} /> <br/> <br />
+                        
+                        <Button className={classes.button} type='submit' color="primary" variant="contained"> Create Entry </Button> 
                     </form>
+                </div>
             </div>
         );
     }
 }
 
+CreateEntryForm.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
 const mapStateToProps = reduxState => ({
     reduxState,
 });
 
-export default connect(mapStateToProps)(CreateEntryForm);
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, null)
+)(CreateEntryForm);

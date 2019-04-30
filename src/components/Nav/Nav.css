@@ -28,7 +28,13 @@
 }
 
 .nav-link:hover {
-  background-color: white;
+  background-color: #f50057;
+  
+}
+
+.nav-link {
+  border-style: solid; 
+  border-color: #f50057;
 }
 
 .nav-right {

@@ -33,11 +33,11 @@ const styles = theme => ({
   },
     button: {
       margin: theme.spacing.unit,
+      width: 170,
     },
 });
 
 class DisplayEntries extends Component {
-
   state = {
     newEntry: {
       title: this.props.entry.title,

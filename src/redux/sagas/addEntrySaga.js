@@ -21,7 +21,6 @@ function* entry (action) {
         'Accept-Language': 'en-US,en;q=0.8',
         // 'Content-Type': 'image/png', 
         'content-type': 'multipart/form-data'
-
     }});
 
     } catch (error) {

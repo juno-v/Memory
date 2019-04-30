@@ -22,7 +22,7 @@ class RegisterPage extends Component {
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
-  } // end registerUser
+  } 
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -32,6 +32,7 @@ class RegisterPage extends Component {
 
   render() {
     return (
+      
       <div>
         {this.props.errors.registrationMessage && (
           <h2
@@ -84,6 +85,7 @@ class RegisterPage extends Component {
           </button>
         </center>
       </div>
+
     );
   }
 }
