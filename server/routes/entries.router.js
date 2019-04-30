@@ -15,6 +15,10 @@ const IAM_USER_SECRET = process.env.aws_secret_access_key;
  
 const verbose = false; //turns on and off console.logs
 
+router.post('/upload-form', upload.single('file'), async(req, res) => {
+  uploadPost(req, res);
+});
+
 const uploadPost = async (req, res) => {
   console.log(`Hit uploadPost!`);
   console.log(`req.file is: `, req.file);
@@ -60,11 +64,10 @@ function uploadToS3(file, res) {
         })
       })
       .catch(error => {
-        res.sendStatus(500);
-      })
+      res.sendStatus(500);
+    })
   })
 }
-
 
   const uploadToSQL = async(req, media_key, res) => {
     
@@ -93,14 +96,6 @@ function uploadToS3(file, res) {
       
     }
 }
-
-router.post('/upload-form', upload.single('file'), async(req, res) =>{
-  uploadPost(req, res);
-})
-
-
-
-
 
 router.get('/user-entries/:id', (req,res) => {
   const id = req.params.id;

@@ -19,12 +19,11 @@ import TextField from '@material-ui/core/TextField';
 
 
 // unused imports , delete when done 
-// import axios from "axios"
 // import { runInThisContext } from 'vm';
 
 const styles = theme => ({
   card: {
-    maxWidth: 200,
+    width: 300, 
   },
   media: {
     height: 0,
@@ -32,8 +31,20 @@ const styles = theme => ({
     marginTop:'30'
   },
     button: {
-      margin: theme.spacing.unit,
       width: 170,
+    },
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)',
+    },
+    actions: {
+      display: 'flex',
     },
 });
 
@@ -61,9 +72,8 @@ class DisplayEntries extends Component {
 
     deleteJournal = () => {
       console.log(`hit delete!`);
-      console.log(this.props.entry.id);
+      console.log(`entry id being deleted`, this.props.entry.id);
       console.log(`user id is`, this.state.id);
-    
       this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });
     }
 
@@ -78,19 +88,19 @@ class DisplayEntries extends Component {
       return(event) =>{
       this.setState({
           newEntry: {
-              ...this.state.newEntry,
-              [propertyName]: event.target.value,
-            }
+            ...this.state.newEntry,
+            [propertyName]: event.target.value,
+          }
         });
       }    
     }
 
-    flip = () => {
-      console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
-      this.setState({
-        flip: !this.state.flip, 
-      })
-    this.props.dispatch({type: 'EDIT_ENTRY', payload: this.state });
+  flip = () => {
+    console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
+    this.setState({
+      flip: !this.state.flip, 
+    })
+  this.props.dispatch({type: 'EDIT_ENTRY', payload: this.state });
   }
 
   websiteUrl = (url) => {
@@ -99,19 +109,13 @@ class DisplayEntries extends Component {
   }
 
   handleExpandClick = () => {
-    console.log(`STATE IS???? `, this.state)
-    console.log(`reduxState is???? `, this.props.reduxState.getUserEntries);
-    
-    this.setState(
-      ({ 
+    this.setState({ 
       expanded: !this.state.expanded 
-    }));
+    });
   };
 
   render() {
     const { classes } = this.props;
-    
-
     return (
       <div>
       {this.state.flip ?
@@ -160,12 +164,13 @@ class DisplayEntries extends Component {
             </Typography>
          <Typography > Journal actions </Typography> <hr /> 
          <Typography>
-              <Button className={classes.button}  value="1" variant="contained" color="primary" 
-              onClick={this.editJournal}
-              > Edit Journal </Button> <br />
-              <Button className={classes.button} variant="contained" color="secondary" 
-                onClick={this.deleteJournal}
-                > DELETE </Button> <br />
+           <br />
+          <Button className={classes.button}  value="1" variant="contained" color="primary" 
+          onClick={this.editJournal}
+          > Edit Journal </Button> <br /> <br/>
+          <Button className={classes.button} variant="contained" color="secondary" 
+            onClick={this.deleteJournal}
+            > DELETE </Button> <br />
           </Typography>
          </CardContent>
         </Collapse>
@@ -187,7 +192,7 @@ class DisplayEntries extends Component {
           <TextField type='text' value={this.state.newEntry.description} onChange={this.handleNameChange('description')} 
           label="Insert Description"/>
           <br/>
-          <br /> 
+          <br/>
           <Button onClick={this.flip} type='submit' color="primary" variant="contained"> Save Updated Entry </Button> 
       </div>
           

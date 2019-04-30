@@ -8,8 +8,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
       button: {
-        margin: theme.spacing.unit,
-        width: 170,
+        width: 200,
+     
       },
       text: {
           width: 500,

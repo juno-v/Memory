@@ -1,4 +1,4 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, /* put */ } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* editEntries(action) {
@@ -9,8 +9,8 @@ function* editEntries(action) {
     const id = action.payload.entryId
     
     yield axios.put(`/entry/edit/${id}`, action.payload);
-    // console.log(`response.data is: `, response.data)
-    yield put({ type: 'GET_ENTRIES' , payload: {id: action.payload.id}})
+    yield window.location.reload();
+    // put({ type: 'GET_ENTRIES' , payload: {id: action.payload.id}})
     }
     catch (error) {
       console.log(`Couldn't edit user's entries`);

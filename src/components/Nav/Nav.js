@@ -7,16 +7,10 @@ import './Nav.css';
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title"> Hello, {props.user.username}!  your user_id: {props.user.id} </h2>
+      <h2 className="nav-title"> {props.user.username} </h2>
     </Link>
     <div className="nav-right">
-  
           <LogOutButton className="nav-link"/>
-      
-      {/* Always show this link since the about page is not protected */}
-      {/* <Link className="nav-link" to="/about">
-        About
-      </Link> */}
     </div>
   </div>
 );
