@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
-// import AWSImages from "../AWSImages/AWSImages";
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
-import axios from "axios"
+import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+      button: {
+        width: 200,
+     
+      },
+      text: {
+          width: 500,
+      }
+  });
 
 class CreateEntryForm extends Component {
 
     state = {
         newEntry: {
-            // id: 1,
             user_id: this.props.reduxState.user.id,
             title: '',
             url: '', 
@@ -19,100 +28,95 @@ class CreateEntryForm extends Component {
             description: '',
             file: null,
     }
+}
 
-  }
-    handleNameChange = (propertyName) => {   
+     // set state for onChange of textfields 
+     handleNameChange = (propertyName) => {   
         return(event) =>{
         this.setState({
             newEntry: {
-                ...this.state.newEntry,
+                ...this.state.newEntry, 
                 [propertyName]: event.target.value,
             }
         });
-    }
+    }    
 }
 
-    handleFileUpload = event => {
-        this.setState({ 
-            newEntry: {
-            ...this.state.newEntry,
-             file: event.target.files 
-            }
-        });
-    };
-
-    submitFile = event => {
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append("file", this.state.newEntry.file[0]);
-        axios
-          .post(`/test-upload`, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data"
-            }
-          })
-          .then(response => {
-            // handle your response;
-            alert("file uploaded successfully");
-          })
-          .catch(error => {
-            // handle your error
-          });
-      };
-
+    // on click, dispatch new textfield values to addEntrySaga
     addEntry = (event) => {
         event.preventDefault();
         console.log(`state is: `, this.state.newEntry)
-        // dispatch to saga 
-        this.props.dispatch({ type: 'ADD_ENTRY', payload: this.state.newEntry })
+        // dispatch to saga to post form values 
         this.setState({
         newEntry: {
-            // id: this.state.newEntry.id + 1,
             user_id: this.props.reduxState.user.id,
             title: '',
             url: '',
             date: '',
             location: '', 
-            description: '',         
-            file: '',  
+            description: '',          
         }
     });  
+    this.props.dispatch({ type: 'ADD_ENTRY', payload: this.state.newEntry })
 }
+
+    // set state for onChange of upload file 
+    handleFileChange = (propertyName) => { 
+        return(event) =>{
+            this.setState({
+                newEntry: {
+                    ...this.state.newEntry, 
+                    [propertyName]: event.target.files[0],
+                }
+            });
+        }    
+    }
 
 
     render() {
-    
-        return (
-            <div>
-                    <input label="upload file" type="file" onChange={this.handleFileUpload}/>
-                    <button onClick={this.submitFile}>Upload your image</button>
 
-                    <br/>
-                    <form>
-                        <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')} 
-                        label="Insert Journal Title"/>
-                        <br/>
+        const { classes } = this.props;
+
+        return (
+
+            <div className="CreateEntryFormDiv" >
+                <div className="CreateEntryChildDiv" >
+                    <form onSubmit={this.addEntry} className="materialForm" >
+                        <input type="file" name="file" onChange={this.handleFileChange('file')} /> <br/>
+                        
+                        <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')}
+                        label="Insert Journal Title" className={classes.text} /> <br />
+                        
                         <TextField type='text' value={this.state.newEntry.url || ''} onChange={this.handleNameChange('url')} 
-                        label="Insert Youtube URL"/>
-                        <br/>
-                        <TextField id="date" label="Select Date" type="date" value={this.state.newEntry.date || ''} onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}/>
-                        <br/>
+                        label="Insert Youtube URL" className={classes.text}/> <br/>
+                        
+                        <TextField id="date" label="Select Date" type="date" value={this.state.newEntry.date || ''} 
+                        onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}
+                        className={classes.text} />  <br/>
+                        
                         <TextField type='text' value={this.state.newEntry.location || ''} onChange={this.handleNameChange('location')}
-                        label="Insert Location" />
-                        <br/>
+                        label="Insert Location" className={classes.text} /> <br/>
+                        
                         <TextField type='text' value={this.state.newEntry.description || ''} onChange={this.handleNameChange('description')} 
-                        label="Insert Description"/>
-                        <br/>
-                        <br />
-                        <Button onClick={this.addEntry} type='submit' color="primary" variant="contained"> Create Entry </Button> 
+                        label="Insert Description"  className={classes.text} /> <br/> <br />
+                        
+                        <Button className={classes.button} type='submit' color="primary" variant="contained"> Create Entry </Button> 
                     </form>
+                </div>
             </div>
         );
     }
 }
 
+CreateEntryForm.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
 const mapStateToProps = reduxState => ({
     reduxState,
 });
 
-export default connect(mapStateToProps)(CreateEntryForm);
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, null)
+)(CreateEntryForm);

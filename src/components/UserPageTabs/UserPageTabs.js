@@ -8,6 +8,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import CreateEntryForm from "../CreateEntryForm/CreateEntryForm";
 import EntriesList from "../EntriesList/EntriesList";
+import {withRouter} from 'react-router-dom';
+
 
 function TabContainer(props) {
   return (
@@ -35,11 +37,20 @@ const styles = theme => ({
 class NavTabs extends React.Component {
   state = {
     value: 0,
+    change: 1
   };
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({ 
+      value: value, 
+      // change: this.state.change, 
+    });
   };
+  
+  click = () => {
+    console.log(`hello`);
+    
+  }
 
   addnewEntry = () => {
   console.log(`hello`)
@@ -51,17 +62,38 @@ class NavTabs extends React.Component {
 
     return (
       <NoSsr>
-        <div className={classes.root}>
-          <AppBar position="static">
-            <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
-              <LinkTab label="Create Entry" href="page1" />
-              <LinkTab label="View All Entries" href="page2" />
-            </Tabs>
-          </AppBar>
-          {value === 0 && <TabContainer> {<CreateEntryForm />} </TabContainer>}
-          {value === 1 && <TabContainer> {<EntriesList />} </TabContainer>}
-        </div>
-      </NoSsr>
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
+            <LinkTab label= "View All Entries"href="page1" />
+            <LinkTab label= "Create Entry" href="page2" />
+          </Tabs>
+        </AppBar>
+        {value === 1 && <TabContainer> {<CreateEntryForm />} </TabContainer>}
+        {value === 0 && <TabContainer> {<EntriesList />} </TabContainer>}
+      </div>
+    </NoSsr>
+  //   <NoSsr>
+  // <div className={classes.root}>
+  // <AppBar position="static">
+  //   <Tabs
+  //   value={this.state.value}
+  //   onChange={this.handleChange}
+  //   >
+  //     <Tab label="View All Entries" value="a">
+  //     <EntriesList /> 
+  //     </Tab> 
+      
+
+  //     <Tab label="Create Entry" value="b" onClick={this.handleChange}>
+  //      <CreateEntryForm /> 
+  //     </Tab> 
+      
+  //     <EntriesList />
+  //   </Tabs>
+  //   </AppBar>
+  //   </div>
+  //   </NoSsr>
     );
   }
 }
@@ -70,4 +102,4 @@ NavTabs.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NavTabs);
+export default withStyles(styles)(withRouter(NavTabs));
