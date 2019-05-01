@@ -1,4 +1,4 @@
-import { takeLatest /* ,put */ } from 'redux-saga/effects';
+import { takeLatest , /* put */ } from 'redux-saga/effects';
 import axios from 'axios';
 import FormData from 'form-data'
 
@@ -22,6 +22,7 @@ function* entry (action) {
         // 'Content-Type': 'image/png', 
         'content-type': 'multipart/form-data'
     }});
+    // yield put({ type: 'GET_ENTRIES' , payload: {id: action.payload.user_id}})
 
     } catch (error) {
       console.log(`Couldn't post entries in addEntrySaga`, action.payload, error);

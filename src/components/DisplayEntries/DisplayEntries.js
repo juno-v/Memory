@@ -17,6 +17,12 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import TextField from '@material-ui/core/TextField';
 
+import Fab from '@material-ui/core/Fab';
+import Icon from '@material-ui/core/Icon';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
+import classNames from 'classnames';
+
 
 // unused imports , delete when done 
 // import { runInThisContext } from 'vm';
@@ -31,7 +37,7 @@ const styles = theme => ({
     marginTop:'30'
   },
     button: {
-      width: 170,
+      width: 200,
     },
     expand: {
       transform: 'rotate(0deg)',
@@ -46,6 +52,12 @@ const styles = theme => ({
     actions: {
       display: 'flex',
     },
+    fab: {
+      margin: theme.spacing.unit,
+    },
+    text: {
+      width: 500,
+  },
 });
 
 class DisplayEntries extends Component {
@@ -165,19 +177,21 @@ class DisplayEntries extends Component {
          <Typography > Journal actions </Typography> <hr /> 
          <Typography>
            <br />
-          <Button className={classes.button}  value="1" variant="contained" color="primary" 
-          onClick={this.editJournal}
-          > Edit Journal </Button> <br /> <br/>
-          <Button className={classes.button} variant="contained" color="secondary" 
-            onClick={this.deleteJournal}
-            > DELETE </Button> <br />
+          <Fab className={classes.fab} color="primary" aria-label="Edit" value="1" onClick={this.editJournal}>
+                  <Icon>edit_icon</Icon>
+          </Fab> 
+
+          <Fab className={classes.fab} color="secondary" aria-label="Delete" onClick={this.deleteJournal} >
+                  <DeleteIcon />
+          </Fab>
+
           </Typography>
          </CardContent>
         </Collapse>
       </Card>
       :
 
-      <div>
+      <div className="CreateEntryChildDiv">
           <TextField type='text' value={this.state.newEntry.title} onChange={this.handleNameChange('title')} 
           label="Insert Journal Title"/>
           <br/>
@@ -193,7 +207,10 @@ class DisplayEntries extends Component {
           label="Insert Description"/>
           <br/>
           <br/>
-          <Button onClick={this.flip} type='submit' color="primary" variant="contained"> Save Updated Entry </Button> 
+          <Button variant="contained" className={classes.button} onClick={this.flip} type='submit' color="primary">
+            <SaveIcon />
+            Save Updated Entry
+          </Button>
       </div>
           
       } 

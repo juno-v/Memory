@@ -8,7 +8,7 @@ function* deleteEntries(action) {
     const id = action.payload.entryId
     
     yield axios.delete(`/entry/${id}`);
-    yield put({ type: 'GET_ENTRIES', payload: action.payload})
+    yield put({ type: 'GET_ENTRIES', payload: action.payload});
     }
     catch (error) {
       console.log(`Couldn't delete the user's entries`);

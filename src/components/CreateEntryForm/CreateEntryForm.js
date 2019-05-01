@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 
+
+
 const styles = theme => ({
       button: {
         width: 200,
@@ -13,7 +15,7 @@ const styles = theme => ({
       },
       text: {
           width: 500,
-      }
+      },
   });
 
 class CreateEntryForm extends Component {
@@ -81,6 +83,7 @@ class CreateEntryForm extends Component {
 
             <div className="CreateEntryFormDiv" >
                 <div className="CreateEntryChildDiv" >
+                   
                     <form onSubmit={this.addEntry} className="materialForm" >
                         <input type="file" name="file" onChange={this.handleFileChange('file')} /> <br/>
                         
@@ -98,7 +101,7 @@ class CreateEntryForm extends Component {
                         label="Insert Location" className={classes.text} /> <br/>
                         
                         <TextField type='text' value={this.state.newEntry.description || ''} onChange={this.handleNameChange('description')} 
-                        label="Insert Description"  className={classes.text} /> <br/> <br />
+                        label="Insert Description"  className={classes.text} multiline={true}/> <br/> <br />
                         
                         <Button className={classes.button} type='submit' color="primary" variant="contained"> Create Entry </Button> 
                     </form>
