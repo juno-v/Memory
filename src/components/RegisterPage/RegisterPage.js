@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = theme => ({
+
+});
 
 class RegisterPage extends Component {
   state = {
@@ -31,6 +42,9 @@ class RegisterPage extends Component {
   }
 
   render() {
+
+    const { classes } = this.props;
+
     return (
       
       <div>
@@ -42,48 +56,50 @@ class RegisterPage extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
-        <form onSubmit={this.registerUser}>
+      <div className="registerFormDiv">
+        <center>
+        {/* <form onSubmit={this.registerUser}> */}
           <h1>Register User</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
+            <TextField
+                label="username"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
+                margin="normal"
+                variant="outlined"
+              /> <br />
+
+            <TextField
+                label="password"
+                className={classes.textField}
                 name="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
+                margin="normal"
+                variant="outlined"
+              /> <br />
+        
+          <Button
+              variant="contained" 
+              color="primary"
               className="register"
               type="submit"
               name="submit"
-              value="Register"
-            />
-          </div>
-        </form>
-        <center>
-          <button
-            type="button"
+              onClick={this.registerUser}
+              >
+              Register
+            </Button> <br /> <hr />
+            
+          <Button
+            variant="contained" 
+            color="secondary"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
           >
             Login
-          </button>
+          </Button>
         </center>
+        </div>
       </div>
 
     );
@@ -97,5 +113,11 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(RegisterPage);
+RegisterPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, null)
+)(RegisterPage);

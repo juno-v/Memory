@@ -9,13 +9,7 @@ import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  input: {
-    margin: theme.spacing.unit,
-  },
+
   
 });
 

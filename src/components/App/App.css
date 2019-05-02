@@ -57,3 +57,8 @@ input {
   width: 200px;
 }
 
+.registerFormDiv{
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
