@@ -47,15 +47,6 @@ class NavTabs extends React.Component {
     });
   };
   
-  click = () => {
-    console.log(`hello`);
-    
-  }
-
-  addnewEntry = () => {
-  console.log(`hello`)
-  }
-
   render() {
     const { classes } = this.props;
     const { value } = this.state;

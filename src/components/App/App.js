@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import UserPage from '../UserPage/UserPage';
 import {
   HashRouter as Router,
   Route,
   Redirect,
   Switch,
 } from 'react-router-dom';
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-import UserPage from '../UserPage/UserPage';
 
 
 class App extends Component {
