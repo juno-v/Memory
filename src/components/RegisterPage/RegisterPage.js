@@ -58,7 +58,6 @@ class RegisterPage extends Component {
         )}
       <div className="registerFormDiv">
         <center>
-        {/* <form onSubmit={this.registerUser}> */}
           <h1>Register User</h1>
             <TextField
                 label="username"
@@ -79,7 +78,7 @@ class RegisterPage extends Component {
                 variant="outlined"
               /> <br />
         
-          <Button
+            <Button
               variant="contained" 
               color="primary"
               className="register"
@@ -90,15 +89,15 @@ class RegisterPage extends Component {
               Register
             </Button> <br /> <hr />
             
-          <Button
-            variant="contained" 
-            color="secondary"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
-            Login
-          </Button>
-        </center>
+            <Button
+              variant="contained" 
+              color="secondary"
+              className="link-button"
+              onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
+            >
+              Login
+            </Button>
+          </center>
         </div>
       </div>
 

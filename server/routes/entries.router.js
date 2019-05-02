@@ -104,7 +104,7 @@ router.get('/user-entries/:id', (req,res) => {
   const queryText = `SELECT "entries"."title", "entries"."description", "entries"."location", "entries"."date", "entries"."id", "entries"."url", "images"."file" FROM "entries"
                       JOIN "images" ON "images"."entries_id" = "entries"."id"
                       WHERE "entries"."user_id" = $1
-                      ORDER BY "entries"."date" DESC;`;
+                      ORDER BY "entries"."date" DESC limit 5;`;
   pool.query(queryText, [id])
     .then((result) => { res.send(result.rows); 
 

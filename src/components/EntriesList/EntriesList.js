@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DisplayEntries from "../DisplayEntries/DisplayEntries"; 
 import './Entries.css'
+import SearchBy from "./SearchBy";
 
 class EntriesList extends Component {
 
@@ -18,6 +19,9 @@ class EntriesList extends Component {
 
     return (
       <div>
+        <center>
+          <SearchBy /> 
+        </center>
        
         {/* <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2> */}
          {this.props.reduxState.getUserEntries.map( (entry, index) => {
