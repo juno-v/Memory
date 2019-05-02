@@ -21,8 +21,6 @@ import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
-import classNames from 'classnames';
-
 
 // unused imports , delete when done 
 // import { runInThisContext } from 'vm';
@@ -190,29 +188,27 @@ class DisplayEntries extends Component {
         </Collapse>
       </Card>
       :
-
-      <div className="CreateEntryChildDiv">
-          <TextField type='text' value={this.state.newEntry.title} onChange={this.handleNameChange('title')} 
+      <div>
+          <TextField type='text' value={this.state.newEntry.title} className={classes.text} onChange={this.handleNameChange('title')} 
           label="Insert Journal Title"/>
           <br/>
-          <TextField type='text' value={this.state.newEntry.url} onChange={this.handleNameChange('url')} 
+          <TextField type='text' value={this.state.newEntry.url} className={classes.text} onChange={this.handleNameChange('url')} 
           label="Insert Youtube URL"/>
           <br/>
-          <TextField id="date" label="Select Date" type="date" defaultValue={this.formatDate(this.state.newEntry.date)} onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}/>
+          <TextField id="date" label="Select Date" type="date" className={classes.text} defaultValue={this.formatDate(this.state.newEntry.date)} onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}/>
           <br/>
-          <TextField type='text' value={this.state.newEntry.location} onChange={this.handleNameChange('location')}
+          <TextField type='text' value={this.state.newEntry.location} className={classes.text} onChange={this.handleNameChange('location')}
           label="Insert Location" />
           <br/>
-          <TextField type='text' value={this.state.newEntry.description} onChange={this.handleNameChange('description')} 
-          label="Insert Description"/>
+          <TextField type='text' value={this.state.newEntry.description} className={classes.text} onChange={this.handleNameChange('description')} 
+          label="Insert Description"  />
           <br/>
           <br/>
           <Button variant="contained" className={classes.button} onClick={this.flip} type='submit' color="primary">
             <SaveIcon />
             Save Updated Entry
           </Button>
-      </div>
-          
+        </div>
       } 
       
       </div>

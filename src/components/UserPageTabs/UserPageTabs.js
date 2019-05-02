@@ -73,27 +73,6 @@ class NavTabs extends React.Component {
         {value === 0 && <TabContainer> {<EntriesList />} </TabContainer>}
       </div>
     </NoSsr>
-  //   <NoSsr>
-  // <div className={classes.root}>
-  // <AppBar position="static">
-  //   <Tabs
-  //   value={this.state.value}
-  //   onChange={this.handleChange}
-  //   >
-  //     <Tab label="View All Entries" value="a">
-  //     <EntriesList /> 
-  //     </Tab> 
-      
-
-  //     <Tab label="Create Entry" value="b" onClick={this.handleChange}>
-  //      <CreateEntryForm /> 
-  //     </Tab> 
-      
-  //     <EntriesList />
-  //   </Tabs>
-  //   </AppBar>
-  //   </div>
-  //   </NoSsr>
     );
   }
 }

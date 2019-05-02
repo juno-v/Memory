@@ -5,17 +5,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
-
-
+import Icon from '@material-ui/core/Icon';
 
 const styles = theme => ({
       button: {
         width: 200,
-     
+        marginLeft: theme.spacing.unit,
       },
       text: {
           width: 500,
       },
+      createButtonIcon: {
+        marginLeft: theme.spacing.unit,
+      }
   });
 
 class CreateEntryForm extends Component {
@@ -84,7 +86,7 @@ class CreateEntryForm extends Component {
             <div className="CreateEntryFormDiv" >
                 <div className="CreateEntryChildDiv" >
                    
-                    <form onSubmit={this.addEntry} className="materialForm" >
+                    <form className="materialForm" >
                         <input type="file" name="file" onChange={this.handleFileChange('file')} /> <br/>
                         
                         <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')}
@@ -102,8 +104,10 @@ class CreateEntryForm extends Component {
                         
                         <TextField type='text' value={this.state.newEntry.description || ''} onChange={this.handleNameChange('description')} 
                         label="Insert Description"  className={classes.text} multiline={true}/> <br/> <br />
-                        
-                        <Button className={classes.button} type='submit' color="primary" variant="contained"> Create Entry </Button> 
+                        <Button variant="contained" color="primary" onClick={this.addEntry} style={{justifyContent: 'center'}} >
+                            Create Entry
+                            <Icon className={classes.createButtonIcon}>send</Icon>
+                        </Button>
                     </form>
                 </div>
             </div>
