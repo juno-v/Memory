@@ -2,6 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HomeHeader from "../HomeHeader/HomeHeader";
 import About from "./About";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  input: {
+    margin: theme.spacing.unit,
+  },
+  
+});
 
 class LoginPage extends Component {
   state = {
@@ -32,11 +48,14 @@ class LoginPage extends Component {
   }
 
   render() {
+
+    const { classes } = this.props;
+
     return (
-      <div>
+      <div className="logInParentDiv" >
         <HomeHeader /> 
         <About />
-
+      <div className="loginInChildDiv" >
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -45,48 +64,49 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              className="log-in"
-              type="submit"
-              name="submit"
-              value="Log In"
+        <form className="logInFormDiv" onSubmit={this.login}>
+          <div className="logInUser">
+            <TextField
+              label="username"
+              name="username"
+              className={classes.textField}
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+              margin="normal"
+              variant="outlined"
             />
-          </div>
+       
+            <TextField
+              label="password"
+              name="password"
+              className={classes.textField}
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+              margin="normal"
+              variant="outlined"
+            /> <br />
+            </div>
         </form>
         <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+          <Button
+            variant="contained" 
+            color="primary"
+            className="log-in"
+            type="submit"
+            name="submit" >
+            Log In
+          </Button> <br /> <hr /> 
+
+          <Button
+          variant="contained" 
+          color="secondary"
+          className="link-button" 
+          onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
-            Register
-          </button>
+          Register
+          </Button>
         </center>
+      </div>
       </div>
     );
   }
@@ -99,4 +119,11 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(LoginPage);
+LoginPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, null)
+)(LoginPage);
