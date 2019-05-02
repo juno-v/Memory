@@ -22,7 +22,7 @@ class EntriesList extends Component {
         <center>
           <SearchBy /> 
         </center>
-       
+        <h2> Most recent entries below </h2> <hr /> 
         {/* <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2> */}
          {this.props.reduxState.getUserEntries.map( (entry, index) => {
           return (

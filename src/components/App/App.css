@@ -62,3 +62,9 @@ input {
   margin-right: auto;
   width: 300px;
 }
+
+.searchResults {
+  background-color: yellow;
+  height: 300px;
+  width: 100%; 
+}
