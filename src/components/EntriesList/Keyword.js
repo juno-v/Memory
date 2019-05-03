@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import KeywordEntries from "./KeywordEntries";
 
 
 const styles = theme => ({
@@ -41,8 +42,6 @@ class Keyword extends Component {
     }
 
     button = () => {
-        // console.log(`hit search keyword button!`);
-        // console.log(this.state.keyword);
         this.props.dispatch({type: 'GET_KEYWORDS', payload: this.state });
     }
 
@@ -50,16 +49,23 @@ class Keyword extends Component {
         window.location.reload(); 
     }
 
+    // componentDidMount = () => {
+    //     this.props.dispatch({type: 'GET_KEYWORDS', payload: this.state });
+    // }
+
     render() {
         const { classes } = this.props;
         return (
             <div>
-                {JSON.stringify(this.props.reduxState.getKeywordsReducer)}
+                {/* {JSON.stringify(this.props.reduxState.getKeywordsReducer)} */}
                 <TextField type='text' className={classes.text} onChange={this.handleChange} 
                     label="Insert One Keyword To Earch By"/>
                     <br/> <br/>
-                <Button variant="contained" color="primary" onClick={this.button} className={classes.button}> Search </Button> <br/> <br/>
+                <Button variant="contained" color="primary" /* onClick={this.button} */ className={classes.button}> Search </Button> <br/> <br/>
                 <Button variant="contained" color="secondary" onClick={this.back}>Back To Search </Button>
+
+                <br />
+                <KeywordEntries />
             </div>
         );
     }

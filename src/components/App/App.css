@@ -68,3 +68,9 @@ input {
   height: 300px;
   width: 100%; 
 }
+
+.keywordDiv {
+  background-color: yellow; 
+  height: 200px;  
+  width: 100%; 
+}

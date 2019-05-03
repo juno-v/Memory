@@ -125,8 +125,11 @@ router.get('/keyword/:id/:keyword', (req, res) => {
   const queryText = `SELECT * FROM "entries"
                       WHERE "user_id" = $1
                       AND (
-                      "description" LIKE $2 );`;
-  pool.query(queryText, [id, keyword])
+                      "description" LIKE $2 OR
+                      "title" LIKE $3 OR
+                      "location" LIKE $4 OR
+                      "url" LIKE $5)`;
+  pool.query(queryText, [id, keyword, keyword, keyword, keyword])
     .then ((result) => { res.send(result.rows);
 
     })
