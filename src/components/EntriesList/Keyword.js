@@ -49,23 +49,25 @@ class Keyword extends Component {
         window.location.reload(); 
     }
 
-    // componentDidMount = () => {
-    //     this.props.dispatch({type: 'GET_KEYWORDS', payload: this.state });
-    // }
-
     render() {
         const { classes } = this.props;
         return (
             <div>
-                {/* {JSON.stringify(this.props.reduxState.getKeywordsReducer)} */}
+                {JSON.stringify(this.props.reduxState.getKeywords)} <br/>
                 <TextField type='text' className={classes.text} onChange={this.handleChange} 
-                    label="Insert One Keyword To Earch By"/>
+                    label="Insert One Keyword To Search By"/>
                     <br/> <br/>
-                <Button variant="contained" color="primary" /* onClick={this.button} */ className={classes.button}> Search </Button> <br/> <br/>
+                <Button variant="contained" color="primary" onClick={this.button} className={classes.button}> Search </Button> <br/> <br/>
                 <Button variant="contained" color="secondary" onClick={this.back}>Back To Search </Button>
 
                 <br />
-                <KeywordEntries />
+                {this.props.reduxState.getKeywords.map( (entry, index) => {
+                        return (
+                        <section key={index} className="cards" > 
+                            <KeywordEntries entry={entry} /> 
+                        </section> 
+                        )
+                        })}  
             </div>
         );
     }

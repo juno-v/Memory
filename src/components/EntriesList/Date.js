@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     textField: {
@@ -13,6 +14,11 @@ const styles = theme => ({
 })
 
 class Date extends Component {
+
+    back = () => {
+        window.location.reload(); 
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -26,6 +32,8 @@ class Date extends Component {
                     shrink: true,
                     }}
                 />
+                <br/> <br/> 
+                <Button variant="contained" color="secondary" onClick={this.back}>Back To Search </Button>
             </div>
         );
     }

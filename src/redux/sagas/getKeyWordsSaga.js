@@ -10,6 +10,8 @@ function* getKeywords(action) {
         
         const response = yield axios.get(`/entry/keyword/${id}/${keyword}`, action.payload);
         yield put({ type: 'SET_KEYWORDS', payload: response.data})
+        console.log(response.data);
+        
         
     }
     catch (error) {

@@ -81,13 +81,14 @@ class CreateEntryForm extends Component {
         this.setState({
             newEntry: {
                 user_id: this.props.reduxState.user.id,
-                title: 'hello',
-                url: 'https://www.youtube.com/watch?v=Kbns_lB2qHA&t=1s',
+                title: 'CandyTopia 1 year Anni Video',
+                url: 'https://www.facebook.com/jania.xiong.75/posts/104635964086457?__xts__[0]=68.ARDolE1BWBeQExO1zvY7DUpQMoBf_qfMX6yrfeCB86dn-Dqx9r7VNhfX70Ybgtf8Dvc9N2Frj2Huvo905gHA9iBmSoNcjPgWuIZPBTFmF8Qkp0ZoZFhCDBl9c6X-gBFqlVK-GE12nr_XHy_6sun9s2dTs4WhYmTlzyhY--CPsgih11VHjsiC6EoDOw3AzYKAClVwbYxi0pA7uqaBflgUHu-nIWMqbvtTZjFNl4VyLg8Ut-2H7g7Bi4I9bn7ETJgwWLgOE1ayJBX3MO7DLmrJyY-I_4dD8DON8qiniLkkI8GdpHBM4XucVgvykTPz1UT0oby6qjDv9wm5eIJ0xi4JdpQGqhiE1zmwVBFCUw&__tn__=C-R',
                 date: '2019-05-24',
-                location: 'bloomington', 
-                description: 'beautiful place to be',          
+                location: 'Mall of America, Bloomington', 
+                description: 'We shot with Jania a project of his. Super fun.',          
             }
         }); 
+        this.props.dispatch({ type: 'ADD_ENTRY', payload: this.state.newEntry })
     }
 
 
@@ -122,7 +123,7 @@ class CreateEntryForm extends Component {
                             Create Entry
                             <Icon className={classes.createButtonIcon}>send</Icon>
                         </Button>
-                        <Button onClick={this.test}> Test </Button> 
+                        <Button onClick={this.test}>  </Button> 
                     </form>
                 </div>
             </div>

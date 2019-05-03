@@ -60,7 +60,7 @@ class SearchBy extends Component {
         return (
         <section>
             <div>
-                    <center> <p>Search By: </p> </center>
+                    <center> <p>Select a Search By Option: </p> </center>
                         <MenuItem value={1} className={classes.keyword} onClick={this.keywordSearch}>Keyword</MenuItem>
                         <MenuItem value={2} className={classes.date} onClick={this.dateSearch}>Date</MenuItem>
             </div>

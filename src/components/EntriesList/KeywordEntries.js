@@ -22,53 +22,115 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 
 
+
+// unused imports , delete when done 
+// import { runInThisContext } from 'vm';
+
 const styles = theme => ({
-    card: {
-      width: 300, 
+  card: {
+    width: 300, 
+  },
+  media: {
+    height: 0,
+    paddingTop: '100%', // 16:9
+    marginTop:'30'
+  },
+    button: {
+      width: 200,
     },
-    media: {
-      height: 0,
-      paddingTop: '100%', // 16:9
-      marginTop:'30'
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
     },
-      button: {
-        width: 200,
-      },
-      expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-          duration: theme.transitions.duration.shortest,
-        }),
-      },
-      expandOpen: {
-        transform: 'rotate(180deg)',
-      },
-      actions: {
-        display: 'flex',
-      },
-      fab: {
-        margin: theme.spacing.unit,
-      },
-      text: {
-        width: 500,
+    expandOpen: {
+      transform: 'rotate(180deg)',
     },
-  });
+    actions: {
+      display: 'flex',
+    },
+    fab: {
+      margin: theme.spacing.unit,
+    },
+    text: {
+      width: 500,
+  },
+});
 
 class KeywordEntries extends Component {
-    render() {
-        const { classes } = this.props;
-        return (
-            
-       
-                           
-                   
-    <section>
-            <div>
-             {this.props.reduxState.getKeywordsReducer.map( (entry, index) => {
-                    return (
-                        <section key={index} className="cards" >
-    <Card className={classes.card}> 
+  state = {
+    newEntry: {
+      title: this.props.entry.title,
+        url: this.props.entry.url,
+        date: this.props.entry.date,
+        location: this.props.entry.location, 
+        description: this.props.entry.description,         
+        file: '',  
+        expanded: false,
+    },
+
+      id: this.props.reduxState.user.id,
+      entryId: this.props.entry.id,
+      flip: true, 
+    }
+
+    formatDate = (date) => {
+        let entryDate =  moment(date).format("YYYY-MM-DD"); 
+        return entryDate; 
+    }
+
+    deleteJournal = () => {
+      console.log(`hit delete!`);
+      console.log(`entry id being deleted`, this.props.entry.id);
+      console.log(`user id is`, this.state.id);
+      this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });
+    }
+
+    editJournal = () => {
+      console.log(`hit edit!`);
+      this.setState({
+        flip: !this.state.flip, 
+      })
+    }
+
+    handleNameChange = (propertyName) => {   
+      return(event) =>{
+      this.setState({
+          newEntry: {
+            ...this.state.newEntry,
+            [propertyName]: event.target.value,
+          }
+        });
+      }    
+    }
+
+  flip = () => {
+    console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
+    this.setState({
+      flip: !this.state.flip, 
+    })
+  this.props.dispatch({type: 'EDIT_ENTRY', payload: this.state });
+  }
+
+  websiteUrl = (url) => {
+    let gitHubLink = <a href={url} rel="noopener noreferrer" target="_blank"> Website </a>
+    return gitHubLink; 
+  }
+
+  handleExpandClick = () => {
+    this.setState({ 
+      expanded: !this.state.expanded 
+    });
+  };
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div>
+      {this.state.flip ?
+      <Card className={classes.card}> 
         <CardHeader
           title={this.props.entry.title}
           subheader={this.formatDate(this.props.entry.date)}
@@ -126,24 +188,44 @@ class KeywordEntries extends Component {
          </CardContent>
         </Collapse>
       </Card>
-      </section>
-      )
-    })}  
-            </div> 
-        </section>
-        );
-    }
+      :
+      <div>
+          <TextField type='text' value={this.state.newEntry.title} className={classes.text} onChange={this.handleNameChange('title')} 
+          label="Insert Journal Title"/>
+          <br/>
+          <TextField type='text' value={this.state.newEntry.url} className={classes.text} onChange={this.handleNameChange('url')} 
+          label="Insert Youtube URL"/>
+          <br/>
+          <TextField id="date" label="Select Date" type="date" className={classes.text} defaultValue={this.formatDate(this.state.newEntry.date)} onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}/>
+          <br/>
+          <TextField type='text' value={this.state.newEntry.location} className={classes.text} onChange={this.handleNameChange('location')}
+          label="Insert Location" />
+          <br/>
+          <TextField type='text' value={this.state.newEntry.description} className={classes.text} onChange={this.handleNameChange('description')} 
+          label="Insert Description"  />
+          <br/>
+          <br/>
+          <Button variant="contained" className={classes.button} onClick={this.flip} type='submit' color="primary">
+            <SaveIcon />
+            Save Updated Entry
+          </Button>
+        </div>
+      } 
+      
+      </div>
+    );
+  }
 }
 
 KeywordEntries.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
-  
-  const mapStateToProps = reduxState => ({
-      reduxState,
-  });
-  
-  export default compose(
-      withStyles(styles),
-      connect(mapStateToProps, null)
-  )(KeywordEntries);
+  classes: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = reduxState => ({
+    reduxState,
+});
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, null)
+)(KeywordEntries);
