@@ -77,6 +77,20 @@ class CreateEntryForm extends Component {
     }
 
 
+    test = () => {
+        this.setState({
+            newEntry: {
+                user_id: this.props.reduxState.user.id,
+                title: 'hello',
+                url: 'https://www.youtube.com/watch?v=Kbns_lB2qHA&t=1s',
+                date: '2019-05-24',
+                location: 'bloomington', 
+                description: 'beautiful place to be',          
+            }
+        }); 
+    }
+
+
     render() {
 
         const { classes } = this.props;
@@ -108,6 +122,7 @@ class CreateEntryForm extends Component {
                             Create Entry
                             <Icon className={classes.createButtonIcon}>send</Icon>
                         </Button>
+                        <Button onClick={this.test}> Test </Button> 
                     </form>
                 </div>
             </div>
