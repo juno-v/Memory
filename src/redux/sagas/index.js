@@ -6,6 +6,7 @@ import addEntrySaga from './addEntrySaga'
 import getEntriesSaga from "./getEntriesSaga"; 
 import deleteEntrySaga from "./deleteEntrySaga";
 import editEntrySaga from "./editEntrySaga";
+import getKeywordsSaga from "./getKeyWordsSaga"; 
 
 
 // rootSaga is the primary saga.
@@ -24,6 +25,6 @@ export default function* rootSaga() {
     getEntriesSaga(),
     deleteEntrySaga(),
     editEntrySaga(),
-
+    getKeywordsSaga(),
   ]);
 }

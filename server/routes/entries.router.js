@@ -99,7 +99,7 @@ function uploadToS3(file, res) {
 
 router.get('/user-entries/:id', (req,res) => {
   const id = req.params.id;
-  console.log(`hit GET for get entries `);
+  console.log(`hit GET for get /user-entries/:id `);
 
   const queryText = `SELECT "entries"."title", "entries"."description", "entries"."location", "entries"."date", "entries"."id", "entries"."url", "images"."file" FROM "entries"
                       JOIN "images" ON "images"."entries_id" = "entries"."id"
@@ -112,6 +112,28 @@ router.get('/user-entries/:id', (req,res) => {
     .catch((err) => {
       console.log(`Error getting user entries`, err);
       res.sendStatus(500);
+    });
+})
+
+router.get('/keyword/:id/:keyword', (req, res) => {
+  console.log(`hit GET for /keyword/:id`);
+  console.log(req.params);
+
+  const id = req.params.id; 
+  const keyword = req.params.keyword; 
+  
+  const queryText = `SELECT * FROM "entries"
+                      WHERE "user_id" = $1
+                      AND (
+                      "description" LIKE $2 );`;
+  pool.query(queryText, [id, keyword])
+    .then ((result) => { res.send(result.rows);
+
+    })
+    .catch((err) => {
+      console.log(`Error getting entries containing KEYWORD`, err);
+      res.sendStatus(500); 
+      
     });
 })
 
@@ -128,7 +150,7 @@ router.delete('/:id', (req, res) => {
 
 router.put('/edit/:id', (req, res) => {
   console.log(req.params.id);
-  console.log(req.body);
+  console.log(`req.body is`, req.body);
   const entry = req.body.newEntry;
   console.log(entry.title);
   console.log(entry.date);
