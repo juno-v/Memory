@@ -53,7 +53,7 @@ class Keyword extends Component {
         const { classes } = this.props;
         return (
             <div>
-                {JSON.stringify(this.props.reduxState.getKeywords)} <br/>
+                {/* {JSON.stringify(this.props.reduxState.getKeywords)} <br/> */}
                 <TextField type='text' className={classes.text} onChange={this.handleChange} 
                     label="Insert One Keyword To Search By"/>
                     <br/> <br/>

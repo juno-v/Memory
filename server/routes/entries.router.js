@@ -122,16 +122,19 @@ router.get('/keyword/:id/:keyword', (req, res) => {
   const id = req.params.id; 
   const keyword = req.params.keyword; 
   
-  const queryText = `SELECT * FROM "entries"
-  JOIN "images" ON "images"."entries_id" = "entries"."id"
-                      WHERE "user_id" = $1
+  const queryText =   `SELECT * FROM "entries"
+                      JOIN "images" ON "images"."entries_id" = "entries"."id"
+                      WHERE "user_id" = ${id}
                       AND (
-                      "description" ILIKE $2 OR
-                      "title" ILIKE $3 OR
-                      "location" ILIKE $4 OR
-                      "url" ILIKE $5)`;
-  pool.query(queryText, [id, keyword, keyword, keyword, keyword])
+                      "description" LIKE '%${keyword}%' OR "description" ILIKE '%${keyword}%' OR
+                      "title" LIKE '%${keyword}%' OR "title" ILIKE '%${keyword}%' OR
+                      "location" LIKE '%${keyword}%' OR "location" ILIKE '%${keyword}%' OR
+                      "url" LIKE '%${keyword}%' OR "url" ILIKE '%${keyword}%')`;
+
+  pool.query(queryText)
     .then ((result) => { res.send(result.rows);
+      console.log(result.rows);
+      
 
     })
     .catch((err) => {
@@ -143,6 +146,8 @@ router.get('/keyword/:id/:keyword', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   console.log(req.params.id);
+  console.log(`hit DELETE! `);
+  
   const queryText = 'DELETE FROM "entries" WHERE id=$1';
   pool.query(queryText, [req.params.id])
     .then(() => { res.sendStatus(200); })

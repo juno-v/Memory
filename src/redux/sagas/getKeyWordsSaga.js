@@ -9,8 +9,9 @@ function* getKeywords(action) {
         console.log(id, keyword);
         
         const response = yield axios.get(`/entry/keyword/${id}/${keyword}`, action.payload);
+        console.log(response);
         yield put({ type: 'SET_KEYWORDS', payload: response.data})
-        console.log(response.data);
+        console.log(`DATA IS!@@@@:`, response.data);
         
         
     }

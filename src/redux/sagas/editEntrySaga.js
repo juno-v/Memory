@@ -3,10 +3,11 @@ import axios from 'axios';
 
 function* editEntries(action) {
     try {
-    console.log(`HIT editEntries`);
-    console.log(`PAYLOAD: `, action.payload);
+    // console.log(`HIT editEntries`);
+    // console.log(`PAYLOAD: `, action.payload);
     
     const id = action.payload.entryId
+    console.log(`get entry id !!!!!!!!`, id);
     
     yield axios.put(`/entry/edit/${id}`, action.payload);
     yield window.location.reload();

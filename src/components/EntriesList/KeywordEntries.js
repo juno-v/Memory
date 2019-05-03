@@ -72,7 +72,7 @@ class KeywordEntries extends Component {
     },
 
       id: this.props.reduxState.user.id,
-      entryId: this.props.entry.id,
+      entryId: this.props.entry.entries_id,
       flip: true, 
     }
 
@@ -128,7 +128,9 @@ class KeywordEntries extends Component {
   render() {
     const { classes } = this.props;
     return (
+    
       <div>
+        {JSON.stringify(this.props.reduxState.getKeywords)}
       {this.state.flip ?
       <Card className={classes.card}> 
         <CardHeader
@@ -161,7 +163,7 @@ class KeywordEntries extends Component {
      </CardActions>
      <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
        <CardContent>
-         <Typography >Description:</Typography>
+         <Typography >Description:{this.state.entryId}</Typography>
             <Typography >
             {this.props.entry.description}
             </Typography>
