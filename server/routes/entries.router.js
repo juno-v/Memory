@@ -144,6 +144,32 @@ router.get('/keyword/:id/:keyword', (req, res) => {
     });
 })
 
+
+
+router.get('/date/:id/:date', (req, res) => {
+  console.log(`hit GET for /date/:id`);
+  console.log(req.params);
+  const id = req.params.id; 
+  const date = req.params.date; 
+  
+  const queryText =   `SELECT * FROM "entries"
+                        JOIN "images" ON "images"."entries_id" = "entries"."id"
+                        WHERE "user_id" = ${id}
+                        AND (
+                        "entries"."date" = '${date}');`;
+
+  pool.query(queryText)
+    .then ((result) => { res.send(result.rows);
+      console.log(result.rows);
+    })
+    .catch((err) => {
+      console.log(`Error getting entries containing DATE`, err);
+      res.sendStatus(500); 
+      
+    });
+})
+
+
 router.delete('/:id', (req, res) => {
   console.log(req.params.id);
   console.log(`hit DELETE! `);

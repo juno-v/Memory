@@ -66,8 +66,8 @@ class Keyword extends Component {
                         <section key={index} className="cards" > 
                             <KeywordEntries entry={entry} /> 
                         </section> 
-                        )
-                        })}  
+                )
+                })}  
             </div>
         );
     }

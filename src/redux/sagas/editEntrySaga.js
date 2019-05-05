@@ -10,7 +10,7 @@ function* editEntries(action) {
     console.log(`get entry id !!!!!!!!`, id);
     
     yield axios.put(`/entry/edit/${id}`, action.payload);
-    yield window.location.reload();
+    window.location.reload();
     // put({ type: 'GET_ENTRIES' , payload: {id: action.payload.id}})
     }
     catch (error) {

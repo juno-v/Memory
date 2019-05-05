@@ -21,11 +21,6 @@ import Icon from '@material-ui/core/Icon';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 
-
-
-// unused imports , delete when done 
-// import { runInThisContext } from 'vm';
-
 const styles = theme => ({
   card: {
     width: 300, 
@@ -62,7 +57,7 @@ const styles = theme => ({
   }
 });
 
-class KeywordEntries extends Component {
+class DateEntries extends Component {
   state = {
     newEntry: {
       title: this.props.entry.title,
@@ -223,7 +218,7 @@ class KeywordEntries extends Component {
   }
 }
 
-KeywordEntries.propTypes = {
+DateEntries.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
@@ -234,4 +229,4 @@ const mapStateToProps = reduxState => ({
 export default compose(
     withStyles(styles),
     connect(mapStateToProps, null)
-)(KeywordEntries);
+)(DateEntries);

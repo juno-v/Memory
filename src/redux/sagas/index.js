@@ -7,7 +7,7 @@ import getEntriesSaga from "./getEntriesSaga";
 import deleteEntrySaga from "./deleteEntrySaga";
 import editEntrySaga from "./editEntrySaga";
 import getKeywordsSaga from "./getKeyWordsSaga"; 
-
+import getDateSaga from "./getDateSaga"
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -26,5 +26,6 @@ export default function* rootSaga() {
     deleteEntrySaga(),
     editEntrySaga(),
     getKeywordsSaga(),
+    getDateSaga(), 
   ]);
 }
