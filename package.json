@@ -39,11 +39,13 @@
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
     "test": "jest",
+    "testServer": "jest server/test/*.test.js --forceExit",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
     "jest": "^24.8.0",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "supertest": "^4.0.2"
   },
   "browserslist": [
     ">0.2%",
