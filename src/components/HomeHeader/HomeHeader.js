@@ -5,7 +5,7 @@ class HomeHeader extends Component {
     render() {
         return (
             <header className="homeHeader">
-                <h1> MemorME </h1>
+                <h1> MemorMe </h1>
             </header>
         );
     }

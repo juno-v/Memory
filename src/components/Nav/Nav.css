@@ -4,6 +4,7 @@
     display: inline-block;
     color: black;
     padding-left: 10px;
+    color: white; 
 }
 
 .nav {
@@ -29,12 +30,12 @@
 
 .nav-link:hover {
   background-color: #f50057;
-  
 }
 
 .nav-link {
   border-style: solid; 
   border-color: #f50057;
+  color: white; 
 }
 
 .nav-right {
