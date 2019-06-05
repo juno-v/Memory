@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // const multer  = require('multer');
 // const multerDest ='../uploads';
@@ -22,7 +23,7 @@ const verbose = false; //turns on and off console.logs
 //   uploadPost(req, res);
 // });
 
-router.post('/upload-form', (req, res) => {
+router.post('/upload-form', rejectUnauthenticated, (req, res) => {
   let newEntry = req.body 
   let sqlText = `INSERT INTO "entries" ("user_id", "title", "date", "description", "location", "url")
                   VALUES ($1, $2, $3, $4, $5, $6)`
@@ -109,7 +110,7 @@ function uploadToS3(file, res) {
 //     }
 // }
 
-router.get('/user-entries/:id', (req,res) => {
+router.get('/user-entries/:id', rejectUnauthenticated, (req,res) => {
   const id = req.params.id;
   // commented out AWS code
   // const queryText = `SELECT "entries"."title", "entries"."description", "entries"."location", "entries"."date", "entries"."id", "entries"."url", "images"."file" FROM "entries"
@@ -126,7 +127,7 @@ router.get('/user-entries/:id', (req,res) => {
     });
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const queryText = 'DELETE FROM "entries" WHERE "id" = $1';
   pool.query(queryText, [req.params.id])
     .then(() => { res.sendStatus(200); })
@@ -136,7 +137,7 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-router.put('/edit/:id', (req, res) => {
+router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
   let entry = req.body.newEntry;
   const queryText = `UPDATE "entries" SET 
                      "title" = $1, "date" = $2, "description" = $3, "location"= $4, "url" = $5
