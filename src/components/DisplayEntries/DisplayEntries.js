@@ -17,10 +17,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import TextField from '@material-ui/core/TextField';
 
-
-// unused imports , delete when done 
-// import { runInThisContext } from 'vm';
-
 const styles = theme => ({
   card: {
     width: 300, 
@@ -49,6 +45,7 @@ const styles = theme => ({
 });
 
 class DisplayEntries extends Component {
+
   state = {
     newEntry: {
       title: this.props.entry.title,
@@ -70,15 +67,11 @@ class DisplayEntries extends Component {
         return entryDate; 
     }
 
-    deleteJournal = () => {
-      console.log(`hit delete!`);
-      console.log(`entry id being deleted`, this.props.entry.id);
-      console.log(`user id is`, this.state.id);
+    deleteJournal = (event) => {
       this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });
     }
 
     editJournal = () => {
-      console.log(`hit edit!`);
       this.setState({
         flip: !this.state.flip, 
       })
@@ -95,8 +88,8 @@ class DisplayEntries extends Component {
       }    
     }
 
+  // render editable content 
   flip = () => {
-    console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
     this.setState({
       flip: !this.state.flip, 
     })
@@ -116,17 +109,27 @@ class DisplayEntries extends Component {
 
   render() {
     const { classes } = this.props;
+
+    let date = this.props.entry.date; 
+    if( date === null) {
+      date = "No Date"; 
+    } else {
+      date = this.formatDate(this.props.entry.date); 
+    }
+
     return (
       <div>
       {this.state.flip ?
       <Card className={classes.card}> 
         <CardHeader
           title={this.props.entry.title}
-          subheader={this.formatDate(this.props.entry.date)}
+          subheader={date}
         />
         <CardMedia
           className={classes.media}
-          image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
+          // leaving AWS code comment here for future references. 
+          // image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
+          image={"https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/450/s300/prime-20logo-20color.png"}
           
         />
         <CardContent>

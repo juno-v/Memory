@@ -3,15 +3,12 @@ import axios from 'axios';
 
 function* deleteEntries(action) {
     try {
-    console.log(`HIT deleteEntries`);
-    console.log(`action.payload is: `, action.payload);
     const id = action.payload.entryId
-    
     yield axios.delete(`/entry/${id}`);
     yield put({ type: 'GET_ENTRIES', payload: action.payload})
     }
     catch (error) {
-      console.log(`Couldn't delete the user's entries`);
+      alert(`Error deleting entries. Try again later!`)
     }
 }
 

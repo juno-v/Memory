@@ -34,7 +34,7 @@ class LoginPage extends Component {
     return (
       <div>
         <HomeHeader /> 
-        <h1 > Insert About Here  </h1>
+        <center> 
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -48,7 +48,8 @@ class LoginPage extends Component {
           <div>
             <label htmlFor="username">
               Username:
-              <input
+              <input 
+                style={{ height: 50, width: 200 }}
                 type="text"
                 name="username"
                 value={this.state.username}
@@ -60,6 +61,7 @@ class LoginPage extends Component {
             <label htmlFor="password">
               Password:
               <input
+                style={{ height: 50, width: 200 }}
                 type="password"
                 name="password"
                 value={this.state.password}
@@ -84,6 +86,7 @@ class LoginPage extends Component {
           >
             Register
           </button>
+        </center>
         </center>
       </div>
     );
