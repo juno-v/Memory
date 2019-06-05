@@ -32,7 +32,7 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      
+      <center> 
       <div>
         {this.props.errors.registrationMessage && (
           <h2
@@ -48,6 +48,7 @@ class RegisterPage extends Component {
             <label htmlFor="username">
               Username:
               <input
+                style={{ height: 50, width: 200 }}
                 type="text"
                 name="username"
                 value={this.state.username}
@@ -59,6 +60,7 @@ class RegisterPage extends Component {
             <label htmlFor="password">
               Password:
               <input
+                style={{ height: 50, width: 200 }}
                 type="password"
                 name="password"
                 value={this.state.password}
@@ -85,6 +87,7 @@ class RegisterPage extends Component {
           </button>
         </center>
       </div>
+      </center>
 
     );
   }
