@@ -6,6 +6,7 @@ function* deleteEntries(action) {
     const id = action.payload.entryId
     yield axios.delete(`/entry/${id}`);
     window.location.reload();
+    alert(`You've deleted an entry!`)
     }
     catch (error) {
       alert(`Error deleting entries. Try again later!`)

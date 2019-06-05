@@ -45,6 +45,7 @@ class CreateEntryForm extends Component {
     // on click, dispatch new textfield values to addEntrySaga
     addEntry = (event) => {
         event.preventDefault();
+        this.props.dispatch({ type: 'ADD_ENTRY', payload: this.state.newEntry })
         // dispatch to saga to post form values 
         this.setState({
         newEntry: {
@@ -56,7 +57,6 @@ class CreateEntryForm extends Component {
             description: '',          
         }
     });  
-    this.props.dispatch({ type: 'ADD_ENTRY', payload: this.state.newEntry })
 }
 
     // set state for onChange of upload file 
@@ -70,6 +70,12 @@ class CreateEntryForm extends Component {
             });
         }    
     }
+
+    websiteUrl = (url) => {
+        let gitHubLink = <a href={"https://github.com/jvue96/FullStack-Solo-Project---MemorMe"} 
+        rel="noopener noreferrer" target="_blank"> Github </a>
+        return gitHubLink; 
+      }
 
 
     render() {
@@ -104,6 +110,8 @@ class CreateEntryForm extends Component {
                         </center>
                     </form>
                 </div>
+                <p> Technologies used: Technology used: React, Redux, Node, Amazon Web Services S3, Material UI, Redux, Passport, Postgres</p>
+                <p>Github Repo: {this.websiteUrl()}</p>
             </div>
         );
     }

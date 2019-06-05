@@ -10,7 +10,7 @@ class EntriesList extends Component {
     }
 
     componentDidMount() {
-      this.interval = setInterval(() => this.props.dispatch({ type: 'GET_ENTRIES', payload:this.state }), 1000 );
+      this.interval = setInterval(() => this.props.dispatch({ type: 'GET_ENTRIES', payload:this.state }), 100 );
   }
 
   componentWillUnmount () {
@@ -19,10 +19,18 @@ class EntriesList extends Component {
 
   render() {
 
+    let emptyEntries; 
+    if(this.props.reduxState.getUserEntries.length === 0) {
+      emptyEntries = <center>
+                        <h1> No entries to display. Create some! </h1>
+                      </center>
+    }
+
     return (
       <div>
        
          {/* {JSON.stringify(this.props.reduxState.getUserEntries)} */}
+         {emptyEntries}
          {this.props.reduxState.getUserEntries.map( (entry, index) => {
           return (
            <section key={index} className="cards" > 

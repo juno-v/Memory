@@ -23,7 +23,7 @@ function* entry (action) {
     yield axios.post('/entry/upload-form', action.payload)
 
     } catch (error) {
-      alert(`Sorry, couldn't post the entries. Try again later`);
+      alert(`Please refresh and try again!`);
     }
   }
 
