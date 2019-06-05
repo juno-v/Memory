@@ -21,9 +21,13 @@ function* entry (action) {
       //   'content-type': 'multipart/form-data'
     // }});
     yield axios.post('/entry/upload-form', action.payload)
+    let id = this.props.reduxState.user.id
+    console.log(id);
+    
+    yield axios.get(`/entry/user-entries/${id}`);
 
     } catch (error) {
-      alert(`Please refresh and try again!`);
+      alert(`You've created a case!`);
     }
   }
 

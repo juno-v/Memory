@@ -10,11 +10,7 @@ class EntriesList extends Component {
     }
 
     componentDidMount() {
-      this.interval = setInterval(() => this.props.dispatch({ type: 'GET_ENTRIES', payload:this.state }), 100 );
-  }
-
-  componentWillUnmount () {
-    clearInterval(this.intervalId)
+      this.props.dispatch({ type: 'GET_ENTRIES' , payload: this.state})
   }
 
   render() {
