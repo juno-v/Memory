@@ -67,7 +67,7 @@ class DisplayEntries extends Component {
         return entryDate; 
     }
 
-    deleteJournal = () => {
+    deleteJournal = (event) => {
       this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });
     }
 
@@ -109,13 +109,21 @@ class DisplayEntries extends Component {
 
   render() {
     const { classes } = this.props;
+
+    let date = this.props.entry.date; 
+    if( date === null) {
+      date = "No Date"; 
+    } else {
+      date = this.formatDate(this.props.entry.date); 
+    }
+
     return (
       <div>
       {this.state.flip ?
       <Card className={classes.card}> 
         <CardHeader
           title={this.props.entry.title}
-          subheader={this.formatDate(this.props.entry.date)}
+          subheader={date}
         />
         <CardMedia
           className={classes.media}

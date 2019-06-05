@@ -23,7 +23,7 @@ class CreateEntryForm extends Component {
             user_id: this.props.reduxState.user.id,
             title: '',
             url: '', 
-            date: '',
+            date: null,
             location: '',
             description: '',
             file: null,

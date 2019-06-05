@@ -9,16 +9,20 @@ class EntriesList extends Component {
       id: this.props.reduxState.user.id,
     }
 
-    componentDidMount = () => {
-    this.props.dispatch({ type: 'GET_ENTRIES', payload: this.state })
-    }
+    componentDidMount() {
+      this.interval = setInterval(() => this.props.dispatch({ type: 'GET_ENTRIES', payload:this.state }), 1000 );
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.intervalId)
+  }
 
   render() {
 
     return (
       <div>
        
-        {/* <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2> */}
+         {/* {JSON.stringify(this.props.reduxState.getUserEntries)} */}
          {this.props.reduxState.getUserEntries.map( (entry, index) => {
           return (
            <section key={index} className="cards" > 

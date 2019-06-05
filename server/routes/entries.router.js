@@ -80,33 +80,34 @@ function uploadToS3(file, res) {
   })
 }
 
-  const uploadToSQL = async(req, media_key, res) => {
+
+// commenting out AWS code 
+//   const uploadToSQL = async(req, media_key, res) => {
     
-    const newEntry = req.body;
-    const client = await pool.connect();
-    try {
-      await client.query('BEGIN')
-      const entry = await client.query(`INSERT INTO "entries" ("user_id", "title", "date", "description", "location", "url")
-      VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`, [
-        newEntry.user_id,
-        newEntry.title,
-        newEntry.date,
-        newEntry.description,
-        newEntry.location,
-        newEntry.url,
-      ])
-      const insertPhotoText = `INSERT INTO "images" ("file", "entries_id") VALUES($1,$2);`
-      const insertPhotoValues = [media_key, entry.rows[0].id]
-      await client.query(insertPhotoText, insertPhotoValues)
-      await client.query('COMMIT')
-    } catch (e) {
-      await client.query('ROLLBACK')
-      throw e
-    } finally {
-      client.release();
-      
-    }
-}
+//     const newEntry = req.body;
+//     const client = await pool.connect();
+//     try {
+//       await client.query('BEGIN')
+//       const entry = await client.query(`INSERT INTO "entries" ("user_id", "title", "date", "description", "location", "url")
+//       VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`, [
+//         newEntry.user_id,
+//         newEntry.title,
+//         newEntry.date,
+//         newEntry.description,
+//         newEntry.location,
+//         newEntry.url,
+//       ])
+//       const insertPhotoText = `INSERT INTO "images" ("file", "entries_id") VALUES($1,$2);`
+//       const insertPhotoValues = [media_key, entry.rows[0].id]
+//       await client.query(insertPhotoText, insertPhotoValues)
+//       await client.query('COMMIT')
+//     } catch (e) {
+//       await client.query('ROLLBACK')
+//       throw e
+//     } finally {
+//       client.release();
+//     }
+// }
 
 router.get('/user-entries/:id', (req,res) => {
   const id = req.params.id;
@@ -126,7 +127,7 @@ router.get('/user-entries/:id', (req,res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  const queryText = 'DELETE FROM "entries" WHERE id=$1';
+  const queryText = 'DELETE FROM "entries" WHERE "id" = $1';
   pool.query(queryText, [req.params.id])
     .then(() => { res.sendStatus(200); })
     .catch((err) => {
@@ -136,6 +137,7 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/edit/:id', (req, res) => {
+  let entry = req.body.newEntry;
   const queryText = `UPDATE "entries" SET 
                      "title" = $1, "date" = $2, "description" = $3, "location"= $4, "url" = $5
                      WHERE "id" = $6`;
