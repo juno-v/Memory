@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const multer  = require('multer');
-const multerDest ='../uploads';
-const upload = multer({ dest: multerDest });
+// const multer  = require('multer');
+// const multerDest ='../uploads';
+// const upload = multer({ dest: multerDest });
 
 const pool = require('../modules/pool');
-const fs    = require('fs-extra');
-const AWS   = require('aws-sdk');
+// const fs    = require('fs-extra');
+// const AWS   = require('aws-sdk');
 
-const BUCKET_NAME     = process.env.bucket_name;
-const IAM_USER_KEY    = process.env.aws_access_key_id;
-const IAM_USER_SECRET = process.env.aws_secret_access_key;
+// const BUCKET_NAME     = process.env.bucket_name;
+// const IAM_USER_KEY    = process.env.aws_access_key_id;
+// const IAM_USER_SECRET = process.env.aws_secret_access_key;
  
 const verbose = false; //turns on and off console.logs
 
