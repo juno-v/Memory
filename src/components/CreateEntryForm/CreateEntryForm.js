@@ -45,7 +45,6 @@ class CreateEntryForm extends Component {
     // on click, dispatch new textfield values to addEntrySaga
     addEntry = (event) => {
         event.preventDefault();
-        console.log(`state is: `, this.state.newEntry)
         // dispatch to saga to post form values 
         this.setState({
         newEntry: {
@@ -82,7 +81,8 @@ class CreateEntryForm extends Component {
             <div className="CreateEntryFormDiv" >
                 <div className="CreateEntryChildDiv" >
                     <form onSubmit={this.addEntry} className="materialForm" >
-                        <input type="file" name="file" onChange={this.handleFileChange('file')} /> <br/>
+                        {/* commented out AWS functinoality. will not include for deployment purposes. */}
+                        {/* <input type="file" name="file" onChange={this.handleFileChange('file')} /> <br/> */}
                         
                         <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')}
                         label="Insert Journal Title" className={classes.text} /> <br />

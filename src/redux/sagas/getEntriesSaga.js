@@ -3,25 +3,17 @@ import axios from 'axios';
 
 function* getEntries(action) {
     try {
-    console.log(`HIT getEntriesSaga`);
-    // console.log(`action.payload is: `, action.payload.id);
     const id = action.payload.id;
-    console.log(`id is`, id );
-    console.log(`PAYLOAD: `, action.payload);
-    
-    
     const response = yield axios.get(`/entry/user-entries/${id}`);
-    console.log(`response.data is: `, response.data);
-    
     yield put({ type: 'SET_ENTRIES', payload: response.data})
     }
     catch (error) {
-      console.log(`Couldn't get user's entries`, error);
+      alert(`Error getting entries! Try again later.`)
     }
 }
 
 function* getEntriesSaga() {
     yield takeLatest('GET_ENTRIES', getEntries);
-  }
+}
 
 export default getEntriesSaga;

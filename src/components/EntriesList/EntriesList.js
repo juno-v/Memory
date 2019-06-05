@@ -7,7 +7,6 @@ class EntriesList extends Component {
 
     state = {
       id: this.props.reduxState.user.id,
-      
     }
 
     componentDidMount = () => {
