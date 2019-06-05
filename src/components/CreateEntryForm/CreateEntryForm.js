@@ -99,8 +99,9 @@ class CreateEntryForm extends Component {
                         
                         <TextField type='text' value={this.state.newEntry.description || ''} onChange={this.handleNameChange('description')} 
                         label="Insert Description"  className={classes.text} /> <br/> <br />
-                        
+                        <center>
                         <Button className={classes.button} type='submit' color="primary" variant="contained"> Create Entry </Button> 
+                        </center>
                     </form>
                 </div>
             </div>
