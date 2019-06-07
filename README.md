@@ -1,4 +1,6 @@
-# PROJECT SUMMARY
+# PROJECT SUMMARY 
+(Live website demo - https://desolate-reaches-32477.herokuapp.com/#/home)
+(View demo instructions below to use the application)
 Full-Stack Application that acts as a journaling system. 
 Organizes by dates. 
 Users are able to search by dates and key words. 
