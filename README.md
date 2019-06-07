@@ -1,10 +1,11 @@
 # PROJECT SUMMARY 
 (Live website demo - https://desolate-reaches-32477.herokuapp.com/#/home)
 (View demo instructions below to use the application)
-Full-Stack Application that acts as a journaling system. 
-Organizes by dates. 
-Users are able to search by dates and key words. 
-Users are able to upload images from their local computer to their Amazon Web Services S3 Bucket (Cloud) 
+
+- Full-Stack Application that acts as a journaling system. 
+- Organizes by dates. 
+- Users are able to search by dates and key words. 
+- Users are able to upload images from their local computer to their Amazon Web Services S3 Bucket (Cloud) 
 
 # Fork/Clone/Download the repo 
 
