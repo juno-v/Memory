@@ -4,13 +4,11 @@ Organizes by dates.
 Users are able to search by dates and key words. 
 Users are able to upload images from their local computer to their Amazon Web Services S3 Bucket (Cloud) 
 
-#INSTRUCTIONS
-Fork/Clone/Download the repo 
+# Fork/Clone/Download the repo 
 
+# Instructions to create database
 1. Open your application for a PostgreSQL database (Postico was used: https://eggerapps.at/postico/)
-
 2. Start your PostgreSQL database
-
 3. Create your PostgreSQL database with this data:
 
 * Your database name has to be: prime_app *
@@ -20,7 +18,6 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
-
 
 CREATE TABLE "entries" (
 	"id" SERIAL PRIMARY KEY, 
@@ -38,13 +35,6 @@ CREATE TABLE "images" (
 	"file" varchar
 );
 
-4. Open your terminal in your create react app file and type the following commands in different windows/tabs:
-npm install 
-npm run server
-npm run client
-
-5. Demo away! 
-
 # Amazon Web Services S3 Buckets Instructions
 1. Create an account: https://aws.amazon.com/s3/
 2. Create a bucket: https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
@@ -61,12 +51,15 @@ SERVER_SESSION_SECRET = aSecretPassword
 
 4. In your .gitignore file, type *.env to hide your sensitive information
 
+# Run the applicatoin!
+1. Open your terminal in your create react app file and type the following commands in different windows/tabs:
+npm install 
+npm run server
+npm run client
 
-# Technologies used
-Database -> PostgreSQL 
-Front End -> React, Redux, Material UI 
-Back End - Node, Express, PG
-Other: Amazon Web Services Buckets 
+# Demo Instruction 
+1. Create an account by click the regiser user 
+2. Create a username and password that you will remember. Once it's created you are not able to forget password and find it again. You'll have to create a new account if you forget your credentials. 
 
 
 # EXTRA NOTES FOR AWS
@@ -81,5 +74,11 @@ located in
 COMMENT THIS CODE OUT for AWS functionality. 
 -> server/routes/entries.router.js
 comment out line 26-44
+
+# Technologies used
+Database -> PostgreSQL 
+Front End -> React, Redux, Material UI 
+Back End - Node, Express, PG
+Other: Amazon Web Services Buckets 
 
 
