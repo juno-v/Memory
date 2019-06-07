@@ -13,6 +13,8 @@ Fork/Clone/Download the repo
 
 3. Create your PostgreSQL database with this data:
 
+* Your database name has to be: prime_app *
+
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
