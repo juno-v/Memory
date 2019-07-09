@@ -159,7 +159,6 @@ router.get('/keyword/:id/:keyword', (req, res) => {
   const keyword = req.params.keyword; 
   
   const queryText =   `SELECT * FROM "entries"
-                      JOIN "images" ON "images"."entries_id" = "entries"."id"
                       WHERE "user_id" = ${id}
                       AND (
                       "description" LIKE '%${keyword}%' OR "description" ILIKE '%${keyword}%' OR
