@@ -1,5 +1,5 @@
 # PROJECT SUMMARY
-Full-Stack Application that acts as a journaling system. 
+An application that serves as an online journaling system. 
 Organizes by dates. 
 Users are able to search by dates and key words. 
 Users are able to upload images from their local computer to their Amazon Web Services S3 Bucket (Cloud) 
