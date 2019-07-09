@@ -21,18 +21,13 @@ import Icon from '@material-ui/core/Icon';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 
-
-
-// unused imports , delete when done 
-// import { runInThisContext } from 'vm';
-
 const styles = theme => ({
   card: {
     width: 300, 
   },
   media: {
     height: 0,
-    paddingTop: '100%', // 16:9
+    paddingTop: '100%', 
     marginTop:'30'
   },
     button: {
@@ -82,14 +77,10 @@ class DisplayEntries extends Component {
     }
 
     deleteJournal = () => {
-      console.log(`hit delete!`);
-      console.log(`entry id being deleted`, this.props.entry.id);
-      console.log(`user id is`, this.state.id);
       this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });
     }
 
     editJournal = () => {
-      console.log(`hit edit!`);
       this.setState({
         flip: !this.state.flip, 
       })
@@ -107,7 +98,6 @@ class DisplayEntries extends Component {
     }
 
   flip = () => {
-    console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
     this.setState({
       flip: !this.state.flip, 
     })
@@ -137,7 +127,10 @@ class DisplayEntries extends Component {
         />
         <CardMedia
           className={classes.media}
-          image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
+          // // Not using AWS, commented out code for those who want to utilize AWS in their own fork/download
+          // image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
+          image={`https://www.google.com/search?q=prime+digital+academy+reviews&source=
+          lnms&tbm=isch&sa=X&ved=0ahUKEwjo1PH9qKfjAhUZZc0KHSwsAzoQ_AUIEygE&biw=1344&bih=777#`}
           
         />
         <CardContent>
