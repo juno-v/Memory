@@ -3,7 +3,11 @@ import axios from 'axios';
 
 function* deleteEntries(action) {
     try {
+      console.log(`@@@@@@@@@@ hit saga `, action.payload);
+      
     const id = action.payload.entryId
+    console.log(`ID IS @@@@@@@@`, id);
+    
     yield axios.delete(`/entry/${id}`);
     window.location.reload();
     alert(`You've deleted an entry!`)

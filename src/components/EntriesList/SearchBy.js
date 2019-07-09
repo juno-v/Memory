@@ -32,6 +32,8 @@ class SearchBy extends Component {
 
     keywordSearch = (event) => {
         console.log(`keyword!`);
+        console.log(event.target.value);
+        
         this.setState({ 
             search: event.target.value, 
         });
@@ -46,7 +48,7 @@ class SearchBy extends Component {
 
     render() {
 
-        let search = <p>hello</p>;
+        let search;
         if(this.state.search === 1) {
             search = <Keyword /> 
             return search;

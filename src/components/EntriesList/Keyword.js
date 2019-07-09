@@ -23,10 +23,8 @@ const styles = theme => ({
 class Keyword extends Component {
 
     state = {
-   
         keyword: '', 
         id: this.props.reduxState.user.id,
-    
     }
 
 
@@ -53,10 +51,9 @@ class Keyword extends Component {
         const { classes } = this.props;
         return (
             <div>
-                {/* {JSON.stringify(this.props.reduxState.getKeywords)} <br/> */}
                 <TextField type='text' className={classes.text} onChange={this.handleChange} 
-                    label="Insert One Keyword To Search By"/>
-                    <br/> <br/>
+                label="Insert One Keyword To Search By"/>
+                <br/> <br/>
                 <Button variant="contained" color="primary" onClick={this.button} className={classes.button}> Search </Button> <br/> <br/>
                 <Button variant="contained" color="secondary" onClick={this.back}>Back To Search </Button>
 

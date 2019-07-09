@@ -129,6 +129,8 @@ router.get('/user-entries/:id', rejectUnauthenticated, (req,res) => {
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const queryText = 'DELETE FROM "entries" WHERE "id" = $1';
+  console.log(`hit me`);
+  
   pool.query(queryText, [req.params.id])
     .then(() => { res.sendStatus(200); })
     .catch((err) => {
