@@ -187,22 +187,22 @@ router.get('/date/:id/:date', (req, res) => {
   console.log(req.params);
   const id = req.params.id; 
   const date = req.params.date; 
+
+  console.log(id, date);
+  
   
   const queryText =   `SELECT * FROM "entries"
-                        JOIN "images" ON "images"."entries_id" = "entries"."id"
-                        WHERE "user_id" = ${id}
-                        AND (
-                        "entries"."date" = '${date}');`;
+                        WHERE "user_id" = $1
+                        AND 
+                        "entries"."date" = $2`;
 
-  pool.query(queryText)
+  pool.query(queryText,[id, date])
     .then ((result) => { 
       res.send(result.rows)
-      console.log(`@@@@@ here's the result rows`,result.rows);
     })
     .catch((err) => {
       console.log(`Error getting entries containing DATE`, err);
       res.sendStatus(500); 
-      
     });
 })
 
