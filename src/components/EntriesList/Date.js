@@ -31,8 +31,6 @@ class Date extends Component {
     }
 
     handleChange = (event) => { 
-        console.log(`state.date`, this.state);
-        // console.log(event.target.value);
         this.setState({
             date: event.target.value,
             id: this.props.reduxState.user.id,
@@ -57,6 +55,7 @@ class Date extends Component {
                 <Button variant="contained" color="primary" onClick={this.button} className={classes.button}> Search </Button> <br/> <br/>
                 <Button variant="contained" color="secondary" onClick={this.back}>Back To Search </Button>
                 <br/>
+
                 {this.props.reduxState.getDate.map( (entry, index) => {
                         return (
                         <section key={index} className="cards" > 

@@ -150,4 +150,60 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
+/* SEARCH BY CODE BELOW */
+router.get('/keyword/:id/:keyword', (req, res) => {
+  console.log(`hit GET for /keyword/:id`);
+  console.log(req.params);
+
+  const id = req.params.id; 
+  const keyword = req.params.keyword; 
+  
+  const queryText =   `SELECT * FROM "entries"
+                      JOIN "images" ON "images"."entries_id" = "entries"."id"
+                      WHERE "user_id" = ${id}
+                      AND (
+                      "description" LIKE '%${keyword}%' OR "description" ILIKE '%${keyword}%' OR
+                      "title" LIKE '%${keyword}%' OR "title" ILIKE '%${keyword}%' OR
+                      "location" LIKE '%${keyword}%' OR "location" ILIKE '%${keyword}%' OR
+                      "url" LIKE '%${keyword}%' OR "url" ILIKE '%${keyword}%')`;
+
+  pool.query(queryText)
+    .then ((result) => { res.send(result.rows);
+      console.log(result.rows);
+      
+
+    })
+    .catch((err) => {
+      console.log(`Error getting entries containing KEYWORD`, err);
+      res.sendStatus(500); 
+      
+    });
+})
+
+
+
+router.get('/date/:id/:date', (req, res) => {
+  console.log(`hit GET for /date/:id`);
+  console.log(req.params);
+  const id = req.params.id; 
+  const date = req.params.date; 
+  
+  const queryText =   `SELECT * FROM "entries"
+                        JOIN "images" ON "images"."entries_id" = "entries"."id"
+                        WHERE "user_id" = ${id}
+                        AND (
+                        "entries"."date" = '${date}');`;
+
+  pool.query(queryText)
+    .then ((result) => { 
+      res.send(result.rows)
+      console.log(`@@@@@ here's the result rows`,result.rows);
+    })
+    .catch((err) => {
+      console.log(`Error getting entries containing DATE`, err);
+      res.sendStatus(500); 
+      
+    });
+})
+
 module.exports = router;

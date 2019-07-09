@@ -16,6 +16,15 @@ import classnames from 'classnames';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import TextField from '@material-ui/core/TextField';
+import Fab from '@material-ui/core/Fab';
+import Icon from '@material-ui/core/Icon';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
+
+
+
+// unused imports , delete when done 
+// import { runInThisContext } from 'vm';
 
 const styles = theme => ({
   card: {
@@ -27,7 +36,7 @@ const styles = theme => ({
     marginTop:'30'
   },
     button: {
-      width: 170,
+      width: 200,
     },
     expand: {
       transform: 'rotate(0deg)',
@@ -42,10 +51,15 @@ const styles = theme => ({
     actions: {
       display: 'flex',
     },
+    fab: {
+      margin: theme.spacing.unit,
+    },
+    text: {
+      width: 500,
+  },
 });
 
 class DisplayEntries extends Component {
-
   state = {
     newEntry: {
       title: this.props.entry.title,
@@ -67,11 +81,15 @@ class DisplayEntries extends Component {
         return entryDate; 
     }
 
-    deleteJournal = (event) => {
+    deleteJournal = () => {
+      console.log(`hit delete!`);
+      console.log(`entry id being deleted`, this.props.entry.id);
+      console.log(`user id is`, this.state.id);
       this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });
     }
 
     editJournal = () => {
+      console.log(`hit edit!`);
       this.setState({
         flip: !this.state.flip, 
       })
@@ -88,8 +106,8 @@ class DisplayEntries extends Component {
       }    
     }
 
-  // render editable content 
   flip = () => {
+    console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
     this.setState({
       flip: !this.state.flip, 
     })
@@ -109,27 +127,17 @@ class DisplayEntries extends Component {
 
   render() {
     const { classes } = this.props;
-
-    let date = this.props.entry.date; 
-    if( date === null) {
-      date = "No Date"; 
-    } else {
-      date = this.formatDate(this.props.entry.date); 
-    }
-
     return (
       <div>
       {this.state.flip ?
       <Card className={classes.card}> 
         <CardHeader
           title={this.props.entry.title}
-          subheader={date}
+          subheader={this.formatDate(this.props.entry.date)}
         />
         <CardMedia
           className={classes.media}
-          // leaving AWS code comment here for future references. 
-          // image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
-          image={"https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/450/s300/prime-20logo-20color.png"}
+          image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
           
         />
         <CardContent>
@@ -168,37 +176,40 @@ class DisplayEntries extends Component {
          <Typography > Journal actions </Typography> <hr /> 
          <Typography>
            <br />
-          <Button className={classes.button}  value="1" variant="contained" color="primary" 
-          onClick={this.editJournal}
-          > Edit Journal </Button> <br /> <br/>
-          <Button className={classes.button} variant="contained" color="secondary" 
-            onClick={this.deleteJournal}
-            > DELETE </Button> <br />
+          <Fab className={classes.fab} color="primary" aria-label="Edit" value="1" onClick={this.editJournal}>
+                  <Icon>edit_icon</Icon>
+          </Fab> 
+
+          <Fab className={classes.fab} color="secondary" aria-label="Delete" onClick={this.deleteJournal} >
+                  <DeleteIcon />
+          </Fab>
+
           </Typography>
          </CardContent>
         </Collapse>
       </Card>
       :
-
       <div>
-          <TextField type='text' value={this.state.newEntry.title} onChange={this.handleNameChange('title')} 
+          <TextField type='text' value={this.state.newEntry.title} className={classes.text} onChange={this.handleNameChange('title')} 
           label="Insert Journal Title"/>
           <br/>
-          <TextField type='text' value={this.state.newEntry.url} onChange={this.handleNameChange('url')} 
+          <TextField type='text' value={this.state.newEntry.url} className={classes.text} onChange={this.handleNameChange('url')} 
           label="Insert Youtube URL"/>
           <br/>
-          <TextField id="date" label="Select Date" type="date" defaultValue={this.formatDate(this.state.newEntry.date)} onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}/>
+          <TextField id="date" label="Select Date" type="date" className={classes.text} defaultValue={this.formatDate(this.state.newEntry.date)} onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}/>
           <br/>
-          <TextField type='text' value={this.state.newEntry.location} onChange={this.handleNameChange('location')}
+          <TextField type='text' value={this.state.newEntry.location} className={classes.text} onChange={this.handleNameChange('location')}
           label="Insert Location" />
           <br/>
-          <TextField type='text' value={this.state.newEntry.description} onChange={this.handleNameChange('description')} 
-          label="Insert Description"/>
+          <TextField type='text' value={this.state.newEntry.description} className={classes.text} onChange={this.handleNameChange('description')} 
+          label="Insert Description"  />
           <br/>
           <br/>
-          <Button onClick={this.flip} type='submit' color="primary" variant="contained"> Save Updated Entry </Button> 
-      </div>
-          
+          <Button variant="contained" className={classes.button} onClick={this.flip} type='submit' color="primary">
+            <SaveIcon />
+            Save Updated Entry
+          </Button>
+        </div>
       } 
       
       </div>

@@ -80,7 +80,6 @@ class DateEntries extends Component {
     }
 
     deleteJournal = () => {
-      console.log(`hit delete!`);
       console.log(`entry id being deleted`, this.props.entry.id);
       console.log(`user id is`, this.state.id);
       this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });

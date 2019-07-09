@@ -11,7 +11,6 @@ import UserPageTabs from '../UserPageTabs/UserPageTabs';
 const UserPage = (props) => (
   <section>
   <div>
-    {/* <LogOutButton className="log-in" /> */}
     <Nav />
     <UserPageTabs /> 
   </div>
