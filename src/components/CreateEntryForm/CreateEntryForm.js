@@ -80,8 +80,7 @@ class CreateEntryForm extends Component {
             <div className="CreateEntryFormDiv" >
                 <div className="CreateEntryChildDiv" >
                     <form onSubmit={this.addEntry} className="materialForm" >
-                        {/* commented out AWS functinoality. will not include for deployment purposes. */}
-                        {/* <input type="file" name="file" onChange={this.handleFileChange('file')} /> <br/> */}
+                        <input type="file" name="file" onChange={this.handleFileChange('file')} /> <br/>
                         
                         <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')}
                         label="Insert Journal Title" className={classes.text} /> <br />

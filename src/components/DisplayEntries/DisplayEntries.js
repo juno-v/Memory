@@ -127,11 +127,7 @@ class DisplayEntries extends Component {
         />
         <CardMedia
           className={classes.media}
-          // // Not using AWS, commented out code for those who want to utilize AWS in their own fork/download
-          // image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
-          image={`https://www.google.com/search?q=prime+digital+academy+reviews&source=
-          lnms&tbm=isch&sa=X&ved=0ahUKEwjo1PH9qKfjAhUZZc0KHSwsAzoQ_AUIEygE&biw=1344&bih=777#`}
-          
+          image={`https://s3.us-east-2.amazonaws.com/jvueproject1/${this.props.entry.file}`}
         />
         <CardContent>
           <Typography component="p">
