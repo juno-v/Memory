@@ -1,15 +1,16 @@
-# PROJECT SUMMARY
+# PROJECT SUMMARY 
 Memory is a full stack application that serves as a journaling system.
 
 # Live Demo Website 
 You can demo the application here: https://desolate-reaches-32477.herokuapp.com/#/home <br/>
-*(this repo and deployment does NOT have Amazon Web Services image upload functionality. scroll further for information how to use AWS image upload in the project)*
+*this repo does not have Amazon Web Services image upload enabled out of the box* <br/>
+*the repo contains the code necessary to do so, scroll down to AWS section for further instructions* <br/>
 
 Username: juno 
 Password: juno
 
 # Built with 
-React, Redux, HTML, CSS, PostrgreSQL, Node, Express, Material UI, Amazon Web Services S3 Buckets 
+React, Redux, Passport, HTML, CSS, PostrgreSQL, Node, Express, Material UI, Amazon Web Services S3 Buckets 
 *(see package.json for full list of dependencies)*
 
 # Getting Started
@@ -46,36 +47,39 @@ http://localhost:3000/#/home
 to navigate to the home page of this application and begin demo-ing.
 
 # Amazon Web Services S3 Buckets Instructions
+- This application does not utilize uploading images to start due to requiring personal AWS accounts <br/>
+- If you'd like to demo the AWS functionality, follow these instructoins for the code begin AWS functionality <br/>
+
 1. Create an account: https://aws.amazon.com/s3/
 2. Create a bucket: https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
-* In your create-react-app *
-2. Create a .env file 
-3. In the file, have the following: 
+*In your create-react-app*
+3. Create a .env file 
+4. In the file, have the following:  <br/>
 
-bucket_name = yourAWSS3BucketName 
-aws_access_key_id = yourAccessKeyID
-aws_secret_access_key = yourAWSSecretAccessKey
-AWS_Uploaded_File_URL_LINK = https://s3.us-east-2.amazonaws.com/yourBucketName/
-SERVER_SESSION_SECRET = aSecretPassword
-^ create a strong secret password here: https://passwordsgenerator.net/
+bucket_name = yourAWSS3BucketName <br/>
+aws_access_key_id = yourAccessKeyID <br/>
+aws_secret_access_key = yourAWSSecretAccessKey <br/>
+AWS_Uploaded_File_URL_LINK = https://s3.us-east-2.amazonaws.com/yourBucketName/ <br/>
+SERVER_SESSION_SECRET = aSecretPassword <br/> *skip if you've already completed this in a previous instruction*
+^ create a strong secret password here: https://passwordsgenerator.net/ <br/>
 
-4. In your .gitignore file, type *.env to hide your sensitive information
+5. In your .gitignore file, type *.env to hide your sensitive information
 
 # EXTRA NOTES FOR AWS
-* This application does not utilize uploading images to start due to requiring personal AWS accounts *
-* If you'd like to demo the AWS functionality, follow these instructoins for the code to run image upload *
+- There is code that was commented out for demo-ing without AWS in this repo. 
+- Follow the instructions below to enable AWS image uploads. 
 
-UNCOMMENT the commented out code for AWS functionality.
-located in 
--> server/routes/entries.router.js
--> src/components/CreateEntryForm/CreateEntryForm.js
--> src/components/DisplayEntries/DisplayEntries.js
--> src/redux/sagas/addEntrySaga.js
+UNCOMMENT the commented out code for AWS functionality. <br/>
+*located in* <br/> 
+- server/routes/entries.router.js
+- src/components/CreateEntryForm/CreateEntryForm.js
+- src/components/DisplayEntries/DisplayEntries.js
+- src/redux/sagas/addEntrySaga.js
 
 COMMENT THIS CODE OUT for AWS functionality. 
--> server/routes/entries.router.js
+- server/routes/entries.router.js <br/>
 comment out line 26-44
--> src/components/DisplayEntries/DisplayEntries.js
+- src/components/DisplayEntries/DisplayEntries.js <br/>
 comment out line 132-133
 
 # Login
@@ -99,3 +103,10 @@ Password: juno
 - Debug - last entry to be deleted does not remove from the DOM. Must refresh a few times to see the change. 
 - Draft.js - rich text editor. 
 - WebSocket or Socket.IO - Try to find a way for continuous data reflect on the DOM. 
+
+# Notes for employers 
+- What was exciting about this project? 
+	- Utilizing a new tech: Amazon Web Services S3 Buckets. At Prime Digital Academy, I sat next to other students who were also using AWS services for their solo projects. We called ourselves,”The Corner Office”. I struggled as an individual, and we struggled as a group, trying to find resources to help us implement AWS into our projects. At the end of the two weeks project time we were given, the Corner Office successfully utilized AWS. This success came from communication, pair programming, and most of all, support for each other! The functionality of local files being uploaded into a private account on the cloud is awesome. I wouldn’t have been able to do this without my team. 
+
+- Personal touches that were added 
+	- Aside from design and functionality, this CRUD application is pretty simple. One thing I had to adjust however, is to complete an asynchronous function that contains a POST request on the server side code. I was trying to insert into two tables during the same POST request. It was a little tricky to write up, but I was able to do it. Refer to it here. 
