@@ -1,4 +1,5 @@
-import { takeLatest /* ,put */ } from 'redux-saga/effects';
+
+import { takeLatest , /* put */ } from 'redux-saga/effects';
 import axios from 'axios';
 import FormData from 'form-data'
 
@@ -20,17 +21,16 @@ function* entry (action) {
         // 'Content-Type': 'image/png', 
         'content-type': 'multipart/form-data'
     }});
-    yield axios.post('/entry/upload-form', action.payload)
-    let id = this.props.reduxState.user.id
-    yield axios.get(`/entry/user-entries/${id}`);
 
     } catch (error) {
-      alert(`You've created a a journal entry!`);
+      console.log(`Couldn't post entries in addEntrySaga`, action.payload, error);
+      alert(`Sorry, couldn't post the entries. Try again later`);
     }
   }
 
    function* addEntrySaga() {
     yield takeLatest('ADD_ENTRY', entry);
+ 
   }
 
    export default addEntrySaga;
