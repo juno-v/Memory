@@ -1,20 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const pool = require('../modules/pool'); 
+const verbose = false; //turns on and off console.logs
 
 // const multer  = require('multer');
 // const multerDest ='../uploads';
 // const upload = multer({ dest: multerDest });
-
-const pool = require('../modules/pool');
 // const fs    = require('fs-extra');
 // const AWS   = require('aws-sdk');
 
 // const BUCKET_NAME     = process.env.bucket_name;
 // const IAM_USER_KEY    = process.env.aws_access_key_id;
 // const IAM_USER_SECRET = process.env.aws_secret_access_key;
- 
-const verbose = false; //turns on and off console.logs
 
 // commented out AWS server side code to remove upload functionality. 
 // those who clone this repo will have to create their own AWS S3 BUCKETS account and create a .env

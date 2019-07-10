@@ -20,3 +20,6 @@ CREATE TABLE "images" (
 	"entries_id" int,
 	"file" varchar
 );
+
+/* create initial user  */
+INSERT INTO "user" ("username", "password") VALUES ('juno', '$2b$10$w8MoBsBuDhONIgZgIXtXZe/hJRFz6A7J11kNN52ppuN/5THT7ZzQu');
