@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import HomeHeader from "../HomeHeader/HomeHeader";
 
 class RegisterPage extends Component {
   state = {
@@ -34,6 +35,7 @@ class RegisterPage extends Component {
     return (
       <center> 
       <div>
+        <HomeHeader /> 
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
