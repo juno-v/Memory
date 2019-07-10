@@ -69,10 +69,13 @@ UNCOMMENT the commented out code for AWS functionality.
 located in 
 -> server/routes/entries.router.js
 -> src/components/CreateEntryForm/CreateEntryForm.js
+-> src/components/DisplayEntries/DisplayEntries.js
 
 COMMENT THIS CODE OUT for AWS functionality. 
 -> server/routes/entries.router.js
 comment out line 26-44
+-> src/components/DisplayEntries/DisplayEntries.js
+comment out line 132-133
 
 # Login
 - This is a protected application with only one registered user to avoid going over database cap. 
