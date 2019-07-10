@@ -13,6 +13,6 @@ function* editEntries(action) {
 
 function* editEntrySaga() {
     yield takeLatest('EDIT_ENTRY', editEntries);
-  }
+}
 
 export default editEntrySaga;

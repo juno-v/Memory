@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import Select from '@material-ui/core/Select';
-// import FilledInput from '@material-ui/core/FilledInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
@@ -31,16 +29,12 @@ class SearchBy extends Component {
       };
 
     keywordSearch = (event) => {
-        console.log(`keyword!`);
-        console.log(event.target.value);
-        
         this.setState({ 
             search: event.target.value, 
         });
     }
     
     dateSearch = (event) => {
-        console.log(`date!`);
         this.setState({ 
             search: event.target.value, 
         });
@@ -63,27 +57,31 @@ class SearchBy extends Component {
         <section>
             <div>
                     <center> <p>Select a Search By Option: </p> </center>
-                        <MenuItem value={1} className={classes.keyword} onClick={this.keywordSearch}>Keyword</MenuItem>
-                        <MenuItem value={2} className={classes.date} onClick={this.dateSearch}>Date</MenuItem>
-            </div>
+                    
+                    <MenuItem value={1} 
+                    className={classes.keyword} 
+                    onClick={this.keywordSearch}
+                    >Keyword</MenuItem>
 
-            {/* <div className="searchResults">
-                {search}
-            </div> */}
+                    <MenuItem value={2} 
+                    className={classes.date} 
+                    onClick={this.dateSearch}
+                    >Date</MenuItem>
+            </div>
         </section>
         );
     }
 }
 
 SearchBy.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
-  
-  const mapStateToProps = reduxState => ({
-      reduxState,
-  });
-  
-  export default compose(
-      withStyles(styles),
-      connect(mapStateToProps, null)
-  )(SearchBy);
+classes: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = reduxState => ({
+    reduxState,
+});
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, null)
+)(SearchBy);

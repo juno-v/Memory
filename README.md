@@ -70,6 +70,7 @@ located in
 -> server/routes/entries.router.js
 -> src/components/CreateEntryForm/CreateEntryForm.js
 -> src/components/DisplayEntries/DisplayEntries.js
+-> src/redux/sagas/addEntrySaga.js
 
 COMMENT THIS CODE OUT for AWS functionality. 
 -> server/routes/entries.router.js

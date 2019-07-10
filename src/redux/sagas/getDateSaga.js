@@ -3,7 +3,6 @@ import axios from 'axios';
 
 function* getDate(action) {
     try {
-
         const id = action.payload.id
         const date = action.payload.date
         const response = yield axios.get(`/entry/date/${id}/${date}`, action.payload);

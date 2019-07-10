@@ -127,7 +127,6 @@ router.get('/user-entries/:id', rejectUnauthenticated, (req,res) => {
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const queryText = 'DELETE FROM "entries" WHERE "id" = $1';
-  console.log(`hit me`);
   
   pool.query(queryText, [req.params.id])
     .then(() => { res.sendStatus(200); })
@@ -150,7 +149,8 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
-/* SEARCH BY CODE BELOW */
+/* SEARCH BY DATE/KEYWORD CODE BELOW */
+
 router.get('/keyword/:id/:keyword', (req, res) => {
   console.log(`hit GET for /keyword/:id`);
   console.log(req.params);
@@ -165,12 +165,9 @@ router.get('/keyword/:id/:keyword', (req, res) => {
                       "title" LIKE '%${keyword}%' OR "title" ILIKE '%${keyword}%' OR
                       "location" LIKE '%${keyword}%' OR "location" ILIKE '%${keyword}%' OR
                       "url" LIKE '%${keyword}%' OR "url" ILIKE '%${keyword}%')`;
-
   pool.query(queryText)
     .then ((result) => { res.send(result.rows);
       console.log(result.rows);
-      
-
     })
     .catch((err) => {
       console.log(`Error getting entries containing KEYWORD`, err);
@@ -182,19 +179,12 @@ router.get('/keyword/:id/:keyword', (req, res) => {
 
 
 router.get('/date/:id/:date', (req, res) => {
-  console.log(`hit GET for /date/:id`);
-  console.log(req.params);
   const id = req.params.id; 
   const date = req.params.date; 
-
-  console.log(id, date);
-  
-  
   const queryText =   `SELECT * FROM "entries"
                         WHERE "user_id" = $1
                         AND 
                         "entries"."date" = $2`;
-
   pool.query(queryText,[id, date])
     .then ((result) => { 
       res.send(result.rows)

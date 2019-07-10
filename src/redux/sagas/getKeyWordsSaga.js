@@ -3,21 +3,13 @@ import axios from 'axios';
 
 function* getKeywords(action) {
     try {
-
         const id = action.payload.id
         const keyword = action.payload.keyword
-        console.log(id, keyword);
-        
         const response = yield axios.get(`/entry/keyword/${id}/${keyword}`, action.payload);
-        console.log(response);
         yield put({ type: 'SET_KEYWORDS', payload: response.data})
-        console.log(`DATA IS!@@@@:`, response.data);
-        
-        
     }
     catch (error) {
         console.log(`Couldn't get entries by KEYWORD.`);
-        
     }
 }
 
@@ -25,6 +17,6 @@ function* getKeywords(action) {
 
 function* getKeywordsSaga() {
     yield takeLatest('GET_KEYWORDS', getKeywords);
-  }
+}
 
 export default getKeywordsSaga;

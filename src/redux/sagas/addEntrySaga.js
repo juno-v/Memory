@@ -22,18 +22,15 @@ function* entry (action) {
     // }});
     yield axios.post('/entry/upload-form', action.payload)
     let id = this.props.reduxState.user.id
-    console.log(id);
-    
     yield axios.get(`/entry/user-entries/${id}`);
 
     } catch (error) {
-      alert(`You've created a case!`);
+      alert(`You've created a a journal entry!`);
     }
   }
 
    function* addEntrySaga() {
     yield takeLatest('ADD_ENTRY', entry);
- 
   }
 
    export default addEntrySaga;
