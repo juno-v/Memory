@@ -3,7 +3,7 @@ Memory is a full stack application that serves as a journaling system.
 
 # Live Demo Website 
 You can demo the application here: https://desolate-reaches-32477.herokuapp.com/#/home <br/>
-*(without Amazon Web Services image upload functionality. scroll further for information how to use AWS image upload in the project)*
+*(this repo and deployment does NOT have Amazon Web Services image upload functionality. scroll further for information how to use AWS image upload in the project)*
 
 Username: juno 
 Password: juno
