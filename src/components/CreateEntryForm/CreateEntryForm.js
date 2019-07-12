@@ -103,7 +103,8 @@ class CreateEntryForm extends Component {
                 <div className="CreateEntryChildDiv" >
                    
                     <form className="materialForm" >
-                        <input type="file" name="file" onChange={this.handleFileChange('file')} /> <br/>
+                        <label> image upload REQUIRED</label>
+                        <input type="file"  name="file" onChange={this.handleFileChange('file')} /> <br/>
                         
                         <TextField type='text' value={this.state.newEntry.title || ''} onChange={this.handleNameChange('title')}
                         label="Insert Journal Title" className={classes.text} /> <br />
