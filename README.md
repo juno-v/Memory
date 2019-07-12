@@ -3,11 +3,11 @@ Memory is a full stack application that serves as a journaling system.
 
 # Live Demo Website 
 You can demo the application here: https://desolate-reaches-32477.herokuapp.com/#/home <br/>
-Username: juno 
+Username: juno <br/>
 Password: juno
 <br/>
-*this live demo does not have Amazon Web Services image upload due to requiring integration of personal AWS accounts* <br/>
-*this Github REPO contains the code necessary to do so in local development, scroll down to AWS section for further instructions* <br/>
+- *the live demo (Heroku) does not have Amazon Web Services image upload due to requiring integration of personal AWS accounts* 
+- *this Github REPO contains the code necessary to do so in local development, scroll down to AWS section for further instructions* 
 
 # Built with 
 React, Redux, Passport, HTML, CSS, PostrgreSQL, Node, Express, Material UI, Amazon Web Services S3 Buckets 
@@ -23,7 +23,7 @@ Software that is required prior to starting the application
 - Node.js (https://nodejs.org/en/)
 - PostgresSQL (https://www.postgresql.org/download/) - choose your system and follow those instructions.
 	- Postico was personally used. (https://eggerapps.at/postico/) - A modern PostgreSQL client for mac systems.
-- An Amazon Web Services Account and Bucket 
+- An Amazon Web Services Account and S3 Bucket 
 
 # Installing - Get the Development Environment Running
 1. Fork/Download/Clone this project
@@ -40,12 +40,13 @@ Software that is required prior to starting the application
 # The URL to use the app in local development
 If npm run client did not open a new browser/tab for you, in your browser URL, insert 
 http://localhost:3000/#/home 
-to navigate to the home page of this application and begin demo-ing.
+to navigate to the home page of this application and begin demoing. 
 
 # Amazon Web Services S3 Buckets + .env file Instructions 
 1. Create an Amazon Web Services account here: https://aws.amazon.com/s3/ <br/>
 *Amazon requires credit card information, but you will not be charged if you stay under the free tier data upload*
 2. Create a bucket: https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
+<br/>
 *In your create-react-app*
 3. Create a .env file 
 4. In the file, have the following:  <br/>
@@ -62,7 +63,8 @@ SERVER_SESSION_SECRET = aSecretPassword <br/>
 
 # Login - Begin demo in local development! 
 - To log in as the user, use the following credentials:
-Username: juno
+<br/>
+Username: juno <br/>
 Password: juno
 
 # Completed features listed below 
@@ -79,7 +81,7 @@ Password: juno
 
 # Notes for employers 
 - What was exciting about this project? 
-	- Utilizing a new tech to me at the time: Amazon Web Services S3 Buckets. At Prime Digital Academy (https://primeacademy.io/) , I sat next to other students who were also using AWS services for their solo projects. We called ourselves,”The Corner Office”. I struggled as an individual, and we struggled as a group, trying to find resources to help us implement AWS into our projects. At the end of the two weeks project time we were given, the Corner Office successfully utilized AWS. This success came from communication, pair programming, and most of all, support for each other! The functionality of local files being uploaded into a private account on the cloud is awesome. I wouldn’t have been able to do this without my team. Thank you to the Corner Office and my instructors! 
+	- Utilizing an unfamiliar at the time: _Amazon Web Services S3 Buckets_. At Prime Digital Academy (https://primeacademy.io/) , I sat next to other students who were also using AWS services for their solo projects. We called ourselves,”The Corner Office”. I struggled as an individual, and we struggled as a group, trying to find resources to help us implement AWS into our projects. At the end of the two weeks project time we were given, the Corner Office successfully utilized AWS. This success came from communication, pair programming, and most of all, support for each other! The functionality of local files being uploaded into a private account on the cloud is awesome. I wouldn’t have been able to do this without my team. Thank you to the Corner Office and my instructors! 
 
 - Personal touches that were added 
 	- Material UI was implimented for a standard design feel.
