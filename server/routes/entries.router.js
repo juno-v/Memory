@@ -59,7 +59,6 @@ function uploadToS3(file, res) {
 }
 
   const uploadToSQL = async(req, media_key, res) => {
-    
     const newEntry = req.body;
     const client = await pool.connect();
     try {
@@ -87,9 +86,9 @@ function uploadToS3(file, res) {
 
 router.get('/user-entries/:id', (req,res) => {
   const id = req.params.id;
-  console.log(`hit GET for get /user-entries/:id `);
 
-  const queryText = `SELECT "entries"."title", "entries"."description", "entries"."location", "entries"."date", "entries"."id", "entries"."url", "images"."file" FROM "entries"
+  const queryText = `SELECT "entries"."title", "entries"."description", "entries"."location", 
+                      "entries"."date", "entries"."id", "entries"."url", "images"."file" FROM "entries"
                       JOIN "images" ON "images"."entries_id" = "entries"."id"
                       WHERE "entries"."user_id" = $1
                       ORDER BY "entries"."date" DESC limit 5;`;
@@ -104,9 +103,6 @@ router.get('/user-entries/:id', (req,res) => {
 })
 
 router.get('/keyword/:id/:keyword', (req, res) => {
-  console.log(`hit GET for /keyword/:id`);
-  console.log(req.params);
-
   const id = req.params.id; 
   const keyword = req.params.keyword; 
   
@@ -118,24 +114,18 @@ router.get('/keyword/:id/:keyword', (req, res) => {
                       "title" LIKE '%${keyword}%' OR "title" ILIKE '%${keyword}%' OR
                       "location" LIKE '%${keyword}%' OR "location" ILIKE '%${keyword}%' OR
                       "url" LIKE '%${keyword}%' OR "url" ILIKE '%${keyword}%')`;
-
   pool.query(queryText)
-    .then ((result) => { res.send(result.rows);
-      console.log(result.rows);
-      
-
+    .then ((result) => { 
+      res.send(result.rows);
     })
     .catch((err) => {
       console.log(`Error getting entries containing KEYWORD`, err);
       res.sendStatus(500); 
-      
     });
 })
 
 
 router.get('/date/:id/:date', (req, res) => {
-  console.log(`hit GET for /date/:id`);
-  console.log(req.params);
   const id = req.params.id; 
   const date = req.params.date; 
   
@@ -144,7 +134,6 @@ router.get('/date/:id/:date', (req, res) => {
                         WHERE "user_id" = ${id}
                         AND (
                         "entries"."date" = '${date}');`;
-
   pool.query(queryText)
     .then ((result) => { res.send(result.rows);
       console.log(result.rows);
@@ -157,9 +146,6 @@ router.get('/date/:id/:date', (req, res) => {
 
 
 router.delete('/:id', async(req, res) => {
-  console.log(req.params.id);
-  console.log(`hit DELETE! `);
-
   const client = await pool.connect();
 
   try { 
@@ -167,7 +153,7 @@ router.delete('/:id', async(req, res) => {
     await client.query(`DELETE  FROM entries 
                         WHERE id = $1;`,[req.params.id]);
     await client.query(`DELETE  FROM images 
-                      WHERE entries_id = $1;`,[req.params.id]);
+                        WHERE entries_id = $1;`,[req.params.id]);
     await client.query('COMMIT')
   }
   catch (error) {
@@ -181,22 +167,13 @@ router.delete('/:id', async(req, res) => {
 });
 
 router.put('/edit/:id', (req, res) => {
-  console.log(req.params.id);
-  console.log(`req.body is`, req.body);
-  const entry = req.body.newEntry;
-  console.log(entry.title);
-  console.log(entry.date);
-  console.log(entry.description);
-  console.log(entry.location);
-  console.log(entry.url);
-  console.log(`@@@@@@@`,req.body.entryId);
-  
-
   const queryText = `UPDATE "entries" SET 
                      "title" = $1, "date" = $2, "description" = $3, "location"= $4, "url" = $5
                      WHERE "id" = $6`;
   pool.query(queryText, [entry.title, entry.date, entry.description, entry.location, entry.url, req.body.entryId])
-    .then(() => { res.sendStatus(200); })
+    .then(() => { 
+      res.sendStatus(200); 
+    })
     .catch((err) => {
       console.log('Error deleting entry', err);
       res.sendStatus(500);
