@@ -20,28 +20,17 @@ router.post('/upload-form', upload.single('file'), async(req, res) => {
 });
 
 const uploadPost = async (req, res) => {
-  console.log(`Hit uploadPost!`);
-  console.log(`req.file is: `, req.file);
-  console.log(`req.body.title is: `, req.body.title);
-  console.log(`req.body.url is : `, req.body.url);
-  console.log(`req.body.date is : `, req.body.date);
-  console.log(`req.body.location is : `, req.body.location);
-  console.log(`req.body.description is : `, req.body.description);
-  
-  
   let media_key = await uploadToS3(req.file, res);
   uploadToSQL(req, media_key, res);
   res.sendStatus(201);
 }
 
 function uploadToS3(file, res) {
-  console.log(`Hit uploadToS3!`);
   return new Promise(resolve => {
     
     fs.readFile(file.path)
       .then(data => {
-        console.log(`Hit uploadToS3.then!`);
-        verbose && console.log(`file read: `, data);
+        verbose
         let s3bucket = new AWS.S3({
           accessKeyId: IAM_USER_KEY,
           secretAccessKey: IAM_USER_SECRET,
@@ -72,11 +61,14 @@ function uploadToS3(file, res) {
   const uploadToSQL = async(req, media_key, res) => {
     
     const newEntry = req.body;
+    if(newEntry.date == "null") {
+      newEntry.date === null; 
+    }    
     const client = await pool.connect();
     try {
       await client.query('BEGIN')
       const entry = await client.query(`INSERT INTO "entries" ("user_id", "title", "date", "description", "location", "url")
-      VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`, [
+                                      VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`, [
         newEntry.user_id,
         newEntry.title,
         newEntry.date,
@@ -93,7 +85,6 @@ function uploadToS3(file, res) {
       throw e
     } finally {
       client.release();
-      
     }
 }
 

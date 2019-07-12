@@ -27,7 +27,7 @@ class CreateEntryForm extends Component {
             user_id: this.props.reduxState.user.id,
             title: '',
             url: '', 
-            date: null,
+            date: '',
             location: '',
             description: '',
             file: null,
@@ -49,7 +49,6 @@ class CreateEntryForm extends Component {
     // on click, dispatch new textfield values to addEntrySaga
     addEntry = (event) => {
         event.preventDefault();
-        console.log(`state is: `, this.state.newEntry)
         // dispatch to saga to post form values 
         this.setState({
         newEntry: {
@@ -110,9 +109,9 @@ class CreateEntryForm extends Component {
                         label="Insert Journal Title" className={classes.text} /> <br />
                         
                         <TextField type='text' value={this.state.newEntry.url || ''} onChange={this.handleNameChange('url')} 
-                        label="Insert URL" className={classes.text}/> <br/>
+                        label="Insert Website URL" className={classes.text}/> <br/>
                         
-                        <TextField id="date" label="Select Date" type="date" value={this.state.newEntry.date || ''} 
+                        <TextField id="date" required label="Select Date REQUIRED" type="date" value={this.state.newEntry.date || ''} 
                         onChange={this.handleNameChange('date')} InputLabelProps={{ shrink: true,}}
                         className={classes.text} />  <br/>
                         
