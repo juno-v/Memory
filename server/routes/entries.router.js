@@ -61,9 +61,6 @@ function uploadToS3(file, res) {
   const uploadToSQL = async(req, media_key, res) => {
     
     const newEntry = req.body;
-    if(newEntry.date == "null") {
-      newEntry.date === null; 
-    }    
     const client = await pool.connect();
     try {
       await client.query('BEGIN')
@@ -156,22 +153,32 @@ router.get('/date/:id/:date', (req, res) => {
     .catch((err) => {
       console.log(`Error getting entries containing DATE`, err);
       res.sendStatus(500); 
-      
     });
 })
 
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async(req, res) => {
   console.log(req.params.id);
   console.log(`hit DELETE! `);
-  
-  const queryText = 'DELETE FROM "entries" WHERE id=$1';
-  pool.query(queryText, [req.params.id])
-    .then(() => { res.sendStatus(200); })
-    .catch((err) => {
-      console.log('Error deleting entry', err);
-      res.sendStatus(500);
-    });
+
+  const client = await pool.connect();
+
+  try { 
+    await client.query('BEGIN')
+    await client.query(`DELETE  FROM entries 
+                        WHERE id = $1;`,[req.params.id]);
+    await client.query(`DELETE  FROM images 
+                      WHERE entries_id = $1;`,[req.params.id]);
+    await client.query('COMMIT')
+  }
+  catch (error) {
+    await client.query('ROLLBACK')
+    throw error
+  }
+  finally {
+    client.release(); 
+    res.sendStatus(200);
+  }
 });
 
 router.put('/edit/:id', (req, res) => {
