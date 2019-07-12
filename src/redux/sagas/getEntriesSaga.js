@@ -3,9 +3,9 @@ import axios from 'axios';
 
 function* getEntries(action) {
     try {
-    const id = action.payload.id;
-    const response = yield axios.get(`/entry/user-entries/${id}`);
-    yield put({ type: 'SET_ENTRIES', payload: response.data})
+      const id = action.payload.id;
+      const response = yield axios.get(`/entry/user-entries/${id}`);
+      yield put({ type: 'SET_ENTRIES', payload: response.data})
     }
     catch (error) {
       alert(`Error getting entries! Try again later.`)

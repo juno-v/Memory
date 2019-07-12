@@ -4,11 +4,9 @@ import { log } from 'util';
 
 function* editEntries(action) {
     try {
-    const id = action.payload.entryId
-    console.log(id);
-    
-    yield axios.put(`/entry/edit/${id}`, action.payload);
-    window.location.reload();
+      const id = action.payload.entryId
+      yield axios.put(`/entry/edit/${id}`, action.payload);
+      window.location.reload();
     }
     catch (error) {
       alert(`Error editing entries! Try again later!`)

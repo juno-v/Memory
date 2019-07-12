@@ -90,12 +90,9 @@ class KeywordEntries extends Component {
     }
 
     editJournal = () => {
-      console.log(`hit edit!`);
       this.setState({
         flip: !this.state.flip, 
       })
-      console.log(this.state);
-      
     }
 
     handleNameChange = (propertyName) => {   
@@ -110,7 +107,6 @@ class KeywordEntries extends Component {
     }
 
   flip = () => {
-    console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
     this.setState({
       flip: !this.state.flip, 
     })

@@ -80,14 +80,11 @@ class DateEntries extends Component {
     }
 
     deleteJournal = () => {
-      console.log(`entry id being deleted`, this.props.entry.id);
-      console.log(`user id is`, this.state.id);
       this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });
       window.location.reload();
     }
 
     editJournal = () => {
-      console.log(`hit edit!`);
       this.setState({
         flip: !this.state.flip, 
       })
@@ -105,7 +102,6 @@ class DateEntries extends Component {
     }
 
   flip = () => {
-    console.log(`after hitting FLIP function !!!!`, this.state.newEntry);
     this.setState({
       flip: !this.state.flip, 
     })
