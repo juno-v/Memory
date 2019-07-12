@@ -70,7 +70,7 @@ class DateEntries extends Component {
     },
 
       id: this.props.reduxState.user.id,
-      entryId: this.props.entry.id,
+      entryId: this.props.entry.entries_id,
       flip: true, 
     }
 
