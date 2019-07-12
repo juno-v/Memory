@@ -3,11 +3,11 @@ Memory is a full stack application that serves as a journaling system.
 
 # Live Demo Website 
 You can demo the application here: https://desolate-reaches-32477.herokuapp.com/#/home <br/>
-*this repo does not have Amazon Web Services image upload enabled out of the box* <br/>
-*the repo contains the code necessary to do so, scroll down to AWS section for further instructions* <br/>
-
 Username: juno 
 Password: juno
+<br/>
+*this live demo does not have Amazon Web Services image upload due to requiring integration of personal AWS accounts* <br/>
+*this Github REPO contains the code necessary to do so in local development, scroll down to AWS section for further instructions* <br/>
 
 # Built with 
 React, Redux, Passport, HTML, CSS, PostrgreSQL, Node, Express, Material UI, Amazon Web Services S3 Buckets 
@@ -23,17 +23,13 @@ Software that is required prior to starting the application
 - Node.js (https://nodejs.org/en/)
 - PostgresSQL (https://www.postgresql.org/download/) - choose your system and follow those instructions.
 	- Postico was personally used. (https://eggerapps.at/postico/) - A modern PostgreSQL client for mac systems.
+- An Amazon Web Services Account and Bucket 
 
 # Installing - Get the Development Environment Running
 1. Fork/Download/Clone this project
 2. Open the terminal in the code folder and type "npm install"
 3. Type "npm run server" to start up your server
 4. In a different terminal window/tab, type "npm run client" into your terminal to start up your client
-
-# File configurations
-1. Create a .env file outside of your folders
-2. Visit https://passwordsgenerator.net/ to generate a password.
-3. The .env file should have a line that is SERVER_SESSION_SECRET=paste in the password generated here
 
 # Create database
 1. Open the application you're using for your PostgreSQL database
@@ -46,52 +42,34 @@ If npm run client did not open a new browser/tab for you, in your browser URL, i
 http://localhost:3000/#/home 
 to navigate to the home page of this application and begin demo-ing.
 
-# Amazon Web Services S3 Buckets Instructions
-- This application does not utilize uploading images to start due to requiring personal AWS accounts <br/>
-- If you'd like to demo the AWS functionality, follow these instructoins for the code begin AWS functionality <br/>
-
-1. Create an account: https://aws.amazon.com/s3/
+# Amazon Web Services S3 Buckets + .env file Instructions 
+1. Create an Amazon Web Services account here: https://aws.amazon.com/s3/ <br/>
+*Amazon requires credit card information, but you will not be charged if you stay under the free tier data upload*
 2. Create a bucket: https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
 *In your create-react-app*
 3. Create a .env file 
 4. In the file, have the following:  <br/>
 
-bucket_name = yourAWSS3BucketName <br/>
+bucket_name = yourS3BucketName <br/>
 aws_access_key_id = yourAccessKeyID <br/>
 aws_secret_access_key = yourAWSSecretAccessKey <br/>
 AWS_Uploaded_File_URL_LINK = https://s3.us-east-2.amazonaws.com/yourBucketName/ <br/>
-SERVER_SESSION_SECRET = aSecretPassword <br/> *skip if you've already completed this in a previous instruction*
+SERVER_SESSION_SECRET = aSecretPassword <br/> 
 ^ create a strong secret password here: https://passwordsgenerator.net/ <br/>
 
 5. In your .gitignore file, type *.env to hide your sensitive information
 
-# EXTRA NOTES FOR AWS
-- There is code that was commented out for demo-ing without AWS in this repo. 
-- Follow the instructions below to enable AWS image uploads. 
 
-UNCOMMENT the commented out code for AWS functionality. <br/>
-*located in* <br/> 
-- server/routes/entries.router.js
-- src/components/CreateEntryForm/CreateEntryForm.js
-- src/components/DisplayEntries/DisplayEntries.js
-- src/redux/sagas/addEntrySaga.js
-
-COMMENT THIS CODE OUT for AWS functionality. 
-- server/routes/entries.router.js <br/>
-comment out line 26-44
-- src/components/DisplayEntries/DisplayEntries.js <br/>
-comment out line 132-133
-
-# Login
-- This is a protected application with only one registered user to avoid going over database cap. 
+# Login - Begin demo in local development! 
 - To log in as the user, use the following credentials:
 Username: juno
 Password: juno
 
 # Completed features listed below 
+- Multiple users are able to be registered
 - Users can create entries that include the following: <br/>
 	- Title
-	- Youtube URL (to reference videos if wanted)
+	- A Website URL 
 	- Date
 	- Location (manually typed, no API integration)
 	- Description
@@ -99,14 +77,20 @@ Password: juno
 - Users are able to search by dates and key words. 
 - Users are able to upload images from their local computer to their Amazon Web Services S3 Bucket (Cloud) 
 
-# Next Steps 
-- Debug - last entry to be deleted does not remove from the DOM. Must refresh a few times to see the change. 
-- Draft.js - rich text editor. 
-- WebSocket or Socket.IO - Try to find a way for continuous data reflect on the DOM. 
-
 # Notes for employers 
 - What was exciting about this project? 
-	- Utilizing a new tech: Amazon Web Services S3 Buckets. At Prime Digital Academy, I sat next to other students who were also using AWS services for their solo projects. We called ourselves,”The Corner Office”. I struggled as an individual, and we struggled as a group, trying to find resources to help us implement AWS into our projects. At the end of the two weeks project time we were given, the Corner Office successfully utilized AWS. This success came from communication, pair programming, and most of all, support for each other! The functionality of local files being uploaded into a private account on the cloud is awesome. I wouldn’t have been able to do this without my team. 
+	- Utilizing a new tech to me at the time: Amazon Web Services S3 Buckets. At Prime Digital Academy (https://primeacademy.io/) , I sat next to other students who were also using AWS services for their solo projects. We called ourselves,”The Corner Office”. I struggled as an individual, and we struggled as a group, trying to find resources to help us implement AWS into our projects. At the end of the two weeks project time we were given, the Corner Office successfully utilized AWS. This success came from communication, pair programming, and most of all, support for each other! The functionality of local files being uploaded into a private account on the cloud is awesome. I wouldn’t have been able to do this without my team. Thank you to the Corner Office and my instructors! 
 
 - Personal touches that were added 
-	- Aside from design and functionality, this CRUD application is pretty simple. One thing I had to adjust however, is to complete an asynchronous function that contains a POST request on the server side code. I was trying to insert into two tables during the same POST request. It was a little tricky to write up, but I was able to do it. Refer to it here. 
+	- Material UI was implimented for a standard design feel.
+		- Material UI tabs were used to create a fast and simple experience for users. 
+	- All components for logged in users display on one endpoint (@/#/home) and then conditionally rendered within components. Did not feel the need to have more endpoints for a simple application with two tabs. 
+	- Continued working on the completion of the project even after graduating. 
+		- Project was completed June 6th 2019, check latest commits for added features
+		- Some added features: 
+		- Created a branch that doesn't utilize image uploads and deployed onto Heroku for live demo. 
+		- Users are able to delete from multiple tables. (SQL Transactions)
+# Next Steps 
+- Use Draft.js as rich text editor for journal descriptions. 
+- Use WebSocket or Socket.IO to try and find a way for continuous data reflection on the DOM. 
+- Continue cleaning up the code and re componentize for better organization. 
