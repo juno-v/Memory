@@ -27,7 +27,7 @@ class CreateEntryForm extends Component {
             user_id: this.props.reduxState.user.id,
             title: '',
             url: '', 
-            date: '',
+            date: null,
             location: '',
             description: '',
             file: null,
@@ -77,6 +77,8 @@ class CreateEntryForm extends Component {
     }
 
 
+    // code below serves as an invisible button to enter in test data
+    // this button invisible button is located next to the create entry button 
     test = () => {
         this.setState({
             newEntry: {
