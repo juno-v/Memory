@@ -96,3 +96,4 @@ Password: juno
 - Use Draft.js as rich text editor for journal descriptions. 
 - Use WebSocket or Socket.IO to try and find a way for continuous data reflection on the DOM. 
 - Continue cleaning up the code and re componentize for better organization. 
+- Convert all css styles to follow a CSS pattern. SCSS, BEM, etc. 
