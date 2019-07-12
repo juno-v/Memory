@@ -28,13 +28,10 @@ class Keyword extends Component {
 
 
     handleChange = (event) => { 
-        console.log(`state.keyword`, this.state.keyword);
-        
         this.setState({
             
             keyword: event.target.value,
             id: this.props.reduxState.user.id,
-
         }) 
     }
 

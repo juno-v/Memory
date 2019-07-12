@@ -22,8 +22,7 @@ class EntriesList extends Component {
         <center>
           <SearchBy /> 
         </center>
-        <h2> Most recent entries below (Please delete entries when done with demo, there is a limit on database creations with Heroku)</h2> <hr /> 
-        {/* <h2>Entries :  {JSON.stringify(this.props.reduxState.getUserEntries)}  </h2> */}
+        <h2> Most recent entries below </h2> <hr /> 
          {this.props.reduxState.getUserEntries.map( (entry, index) => {
           return (
            <section key={index} className="cards" > 

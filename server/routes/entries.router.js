@@ -133,7 +133,6 @@ router.get('/keyword/:id/:keyword', (req, res) => {
 })
 
 
-
 router.get('/date/:id/:date', (req, res) => {
   console.log(`hit GET for /date/:id`);
   console.log(req.params);
@@ -190,7 +189,7 @@ router.put('/edit/:id', (req, res) => {
   console.log(entry.description);
   console.log(entry.location);
   console.log(entry.url);
-  console.log(req.body.entryId);
+  console.log(`@@@@@@@`,req.body.entryId);
   
 
   const queryText = `UPDATE "entries" SET 

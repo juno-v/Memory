@@ -75,7 +75,7 @@ class KeywordEntries extends Component {
     },
 
       id: this.props.reduxState.user.id,
-      entryId: this.props.entry.id,
+      entryId: this.props.entry.entries_id,
       flip: true, 
     }
 
@@ -85,9 +85,6 @@ class KeywordEntries extends Component {
     }
 
     deleteJournal = () => {
-      console.log(`@@@@@@@@@@@@@@@@@@@@@hit delete!`);
-      console.log(`entry id being deleted`, this.props.entry.id);
-      console.log(`user id is`, this.state.id);
       this.props.dispatch({type: 'DELETE_ENTRY', payload: this.state });
       window.location.reload();
     }
@@ -97,6 +94,8 @@ class KeywordEntries extends Component {
       this.setState({
         flip: !this.state.flip, 
       })
+      console.log(this.state);
+      
     }
 
     handleNameChange = (propertyName) => {   
