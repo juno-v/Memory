@@ -77,7 +77,7 @@ Password: juno
 	- Location (manually typed, no API integration)
 	- Description
 ![Create an entry](./AppScreenshots/CreateEntry.png)
-- Organizes by dates with the 10 most recent entries shown. 
+- Organizes by dates with the 5 most recent entries shown. 
 ![View entries](./AppScreenshots/ViewEntries.png)
 - Users are able to search by dates and key words. 
 ![Search by date](./AppScreenshots/SearchByDate.png)
