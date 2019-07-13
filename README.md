@@ -62,9 +62,8 @@ to navigate to the home page of this application and begin demoing.
 
 # Login - Begin demo in local development! 
 - To log in as the user, use the following credentials:
-<br/>
-Username: juno <br/>
-Password: juno
+	- Username: juno 
+	- Password: juno
 
 # Completed features listed below & Application screenshots 
 - Multiple users are able to be registered
