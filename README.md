@@ -76,13 +76,13 @@ Password: juno
 	- Date
 	- Location (manually typed, no API integration)
 	- Description
-![Create an entry](./AppScreenshots/CreateEntry.png) <br/>
+![Create an entry](./AppScreenshots/CreateEntry.png) <hr/>
 - Edit entries 
-![Edit an entry](./AppScreenshots/EditEntry.png)<br/>
+![Edit an entry](./AppScreenshots/EditEntry.png) <hr/>
 - Organizes by dates with the 5 most recent entries shown. 
-![View entries](./AppScreenshots/ViewEntries.png)<br/>
+![View entries](./AppScreenshots/ViewEntries.png) <hr/>
 - Users are able to search by dates and key words. 
-![Search by date](./AppScreenshots/SearchByDate.png)<br/>
+![Search by date](./AppScreenshots/SearchByDate.png) <hr/>
 ![Search by keyword](./AppScreenshots/SearchByKeyword.png)
 
 # Notes for employers 
