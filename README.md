@@ -67,17 +67,21 @@ SERVER_SESSION_SECRET = aSecretPassword <br/>
 Username: juno <br/>
 Password: juno
 
-# Completed features listed below 
+# Completed features listed below & Application screenshots 
 - Multiple users are able to be registered
+- Users are able to upload images from their local computer to their Amazon Web Services S3 Bucket (Cloud) 
 - Users can create entries that include the following: <br/>
 	- Title
 	- A Website URL 
 	- Date
 	- Location (manually typed, no API integration)
 	- Description
+![Create an entry](./AppScreenshots/CreateEntry.png)
 - Organizes by dates with the 10 most recent entries shown. 
+![View entries](./AppScreenshots/ViewEntries.png)
 - Users are able to search by dates and key words. 
-- Users are able to upload images from their local computer to their Amazon Web Services S3 Bucket (Cloud) 
+![Search by date](./AppScreenshots/SearchByDate.png)
+![Search by keyword](./AppScreenshots/SearchByKeyword.png)
 
 # Notes for employers 
 - What was exciting about this project? 
