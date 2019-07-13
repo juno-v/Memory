@@ -87,7 +87,7 @@ Password: juno
 
 # Notes for employers 
 - What was exciting about this project? 
-	- Utilizing an unfamiliar at the time: _Amazon Web Services S3 Buckets_. At Prime Digital Academy (https://primeacademy.io/) , I sat next to other students who were also using AWS services for their solo projects. We called ourselves,”The Corner Office”. I struggled as an individual, and we struggled as a group, trying to find resources to help us implement AWS into our projects. At the end of the two weeks project time we were given, the Corner Office successfully utilized AWS. This success came from communication, pair programming, and most of all, support for each other! The functionality of local files being uploaded into a private account on the cloud is awesome. I wouldn’t have been able to do this without my team. Thank you to the Corner Office and my instructors! 
+	- Utilizing an unfamiliar technology at the time: _Amazon Web Services S3 Buckets_. At Prime Digital Academy (https://primeacademy.io/) , I sat next to other students who were also using AWS services for their solo projects. We called ourselves,”The Corner Office”. I struggled as an individual, and we struggled as a group, trying to find resources to help us implement AWS into our projects. At the end of the two weeks project time we were given, the Corner Office successfully utilized AWS. This success came from communication, pair programming, and most of all, support for each other! The functionality of local files being uploaded into a private account on the cloud is awesome. I wouldn’t have been able to do this without my team. Thank you to the Corner Office and my instructors! 
 
 - Personal touches that were added 
 	- Material UI was implimented for a standard design feel.
