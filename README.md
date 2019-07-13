@@ -48,6 +48,7 @@ to navigate to the home page of this application and begin demoing.
 2. Create a bucket: https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
 <br/>
 *In your create-react-app*
+<br/>
 3. Create a .env file <br/>
 4. In the file, have the following:  <br/>
 
