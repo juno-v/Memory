@@ -43,21 +43,20 @@ http://localhost:3000/#/home
 to navigate to the home page of this application and begin demoing. 
 
 # Amazon Web Services S3 Buckets + .env file Instructions 
-- 1. Create an Amazon Web Services account here: https://aws.amazon.com/s3/ <br/>
-*Amazon requires credit card information, but you will not be charged if you stay under the free tier data upload*
-- 2. Create a bucket: https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html <br/>
+1. Create an Amazon Web Services account here: https://aws.amazon.com/s3/ <br/>
+*Amazon requires credit card information, but you will not be charged if you stay under the free tier data upload* <br/>
+2. Create a bucket: https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html <br/>
 *In your create-react-app* <br/>
-- 3. Create a .env file <br/>
-- 4. In the file, have the following:  <br/>
+3. Create a .env file <br/>
+4. In the file, have the following:  <br/>
 
-	- bucket_name = yourS3BucketName <br/>
-	- aws_access_key_id = yourAccessKeyID <br/>
-	- aws_secret_access_key = yourAWSSecretAccessKey <br/>
-	- AWS_Uploaded_File_URL_LINK = https://s3.us-east-2.amazonaws.com/yourBucketName/ <br/>
-	- SERVER_SESSION_SECRET = aSecretPassword <br/> 
-		- ^ create a strong secret password here: https://passwordsgenerator.net/ <br/>
-
-- 5. In your .gitignore file, type *.env to hide your sensitive information
+- bucket_name = yourS3BucketName <br/>
+- aws_access_key_id = yourAccessKeyID <br/>
+- aws_secret_access_key = yourAWSSecretAccessKey <br/>
+- AWS_Uploaded_File_URL_LINK = https://s3.us-east-2.amazonaws.com/yourBucketName/ <br/>
+- SERVER_SESSION_SECRET = aSecretPassword <br/> 
+	- ^ create a strong secret password here: https://passwordsgenerator.net/ <br/>
+5. In your .gitignore file, type *.env to hide your sensitive information
 
 
 # Login - Begin demo in local development! 
