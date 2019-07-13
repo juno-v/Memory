@@ -1,10 +1,11 @@
 import { takeLatest, /* put */ } from 'redux-saga/effects';
 import axios from 'axios';
-import { log } from 'util';
 
 function* editEntries(action) {
     try {
       const id = action.payload.entryId
+      console.log(id);
+      
       yield axios.put(`/entry/edit/${id}`, action.payload);
       window.location.reload();
     }

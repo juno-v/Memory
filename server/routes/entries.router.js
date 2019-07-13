@@ -167,10 +167,13 @@ router.delete('/:id', async(req, res) => {
 });
 
 router.put('/edit/:id', (req, res) => {
+  let entry = req.body.newEntry;
+  let id = req.params.id; 
+  
   const queryText = `UPDATE "entries" SET 
                      "title" = $1, "date" = $2, "description" = $3, "location"= $4, "url" = $5
                      WHERE "id" = $6`;
-  pool.query(queryText, [entry.title, entry.date, entry.description, entry.location, entry.url, req.body.entryId])
+  pool.query(queryText, [entry.title, entry.date, entry.description, entry.location, entry.url, id])
     .then(() => { 
       res.sendStatus(200); 
     })
