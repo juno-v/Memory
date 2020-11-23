@@ -104,9 +104,3 @@ Password: juno
 - Draft.js - rich text editor. 
 - WebSocket or Socket.IO - Try to find a way for continuous data reflect on the DOM. 
 
-# Notes for employers 
-- What was exciting about this project? 
-	- Utilizing a new tech: Amazon Web Services S3 Buckets. At Prime Digital Academy, I sat next to other students who were also using AWS services for their solo projects. We called ourselves,”The Corner Office”. I struggled as an individual, and we struggled as a group, trying to find resources to help us implement AWS into our projects. At the end of the two weeks project time we were given, the Corner Office successfully utilized AWS. This success came from communication, pair programming, and most of all, support for each other! The functionality of local files being uploaded into a private account on the cloud is awesome. I wouldn’t have been able to do this without my team. 
-
-- Personal touches that were added 
-	- Aside from design and functionality, this CRUD application is pretty simple. One thing I had to adjust however, is to complete an asynchronous function that contains a POST request on the server side code. I was trying to insert into two tables during the same POST request. It was a little tricky to write up, but I was able to do it. Refer to it here. 
